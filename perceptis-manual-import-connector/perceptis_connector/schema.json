@@ -1,0 +1,44 @@
+{
+  "required_columns": [
+    "Client ID",
+    "Client Name",
+    "Service Date",
+    "Service Type",
+    "Status",
+    "Hours"
+  ],
+  "optional_columns": [
+    "Worker",
+    "Location",
+    "Notes"
+  ],
+  "rename_map": {
+    "Client ID": "client_id",
+    "Client Name": "client_name",
+    "Service Date": "service_date",
+    "Service Type": "service_type",
+    "Status": "status",
+    "Hours": "hours",
+    "Worker": "worker",
+    "Location": "location",
+    "Notes": "notes"
+  },
+  "date_columns": ["service_date"],
+  "numeric_columns": ["hours"],
+  "string_trim_columns": [
+    "client_id",
+    "client_name",
+    "service_type",
+    "status",
+    "worker",
+    "location",
+    "notes"
+  ],
+  "duplicate_key_columns": [
+    "client_id",
+    "service_date",
+    "service_type",
+    "hours"
+  ],
+  "preview_row_limit": 25
+}

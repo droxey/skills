@@ -1,0 +1,5 @@
+client_id,client_name,service_date,service_type,status,hours,worker,location,notes
+1001,Alex Smith,2026-04-01,Case Management,Completed,1.5,Jordan Lee,Clinic A,Initial intake completed
+1002,Jamie Patel,2026-04-01,Support Visit,Completed,2.0,Riley Chen,Home Visit,Follow-up scheduled
+1001,Alex Smith,2026-04-01,Case Management,Completed,1.5,Jordan Lee,Clinic A,Initial intake completed duplicate
+1003,Taylor Brown,2026-04-03,Transport,Pending,0.75,Morgan Diaz,Clinic B,Awaiting signature
