@@ -1,0 +1,16 @@
+{
+  "preferences": {
+    "autoCompact": false
+  },
+  "permissions": {
+    "allowedTools": [
+      "Read",
+      "Grep",
+      "Glob",
+      "LS",
+      "WebFetch",
+      "TodoRead",
+      "TodoWrite"
+    ]
+  }
+}
