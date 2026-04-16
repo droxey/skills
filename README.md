@@ -28,3 +28,13 @@ Sample prompt:
 ```text
 Use the intake-implementation-workflow skill to turn an intake request into a planning package with a spec, implementation plan, build plan, and implementation checklist.
 ```
+
+
+## musexmachine-mcp-codex-env
+
+Source: `musexmachine/mcp`
+
+Sample prompt:
+```text
+Use the musexmachine-mcp-codex-env skill to create and validate a Codex-ready environment for musexmachine/mcp.
+```
