@@ -14,7 +14,7 @@ def run(command, cwd):
 
 
 class SyncSkillsTests(unittest.TestCase):
-    def test_apply_reinstalls_when_non_skill_file_changes(self):
+    def test_non_skill_file_change_triggers_reinstall(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_path = Path(temp_dir)
             source_repo = temp_path / "source"

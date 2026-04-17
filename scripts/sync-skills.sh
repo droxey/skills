@@ -159,7 +159,7 @@ while IFS=$'\t' read -r NAME PATH_IN_REPO; do
   PREV_REF=""
   PREV_PATH=""
   if [[ -f "$MARKER" ]]; then
-    PREV_HASH="$(awk -F'=' '/^skill_dir_sha256=/{print $2}' "$MARKER" | tr -d '[:space:]')"
+    PREV_HASH="$(awk -F'=' '/^skill_dir_sha256=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '[:space:]')"
     PREV_REPO="$(awk -F'=' '/^repo=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
     PREV_REF="$(awk -F'=' '/^ref=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
     PREV_PATH="$(awk -F'=' '/^path=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
