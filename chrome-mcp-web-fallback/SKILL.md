@@ -1,7 +1,7 @@
 ---
 name: chrome-mcp-web-fallback
 description: Recover failed web retrieval tasks by retrying once with chrome-mcp. Use when curl, web search, fetch/open, or other HTTP/web request steps fail due to blocking, dynamic rendering, bot protection, redirects, or transport errors and a browser-driven fallback is required.
-compatibility: Requires chrome-mcp availability plus network access to target URLs.
+compatibility: Requires chrome-mcp to be installed locally or provided by the runtime environment and callable from this session, plus outbound network access to the target URLs, including DNS resolution and HTTP/HTTPS connectivity.
 ---
 
 # Chrome MCP Web Fallback
