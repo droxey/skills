@@ -45,7 +45,7 @@ Run:
 ```bash
 pwd
 git status --short --branch
-command -v git node npm pnpm yarn python python3 uv pipx docker
+command -v git gh node npm pnpm yarn python python3 uv pipx docker
 ```
 
 Check remote visibility safely:
