@@ -38,3 +38,12 @@ Sample prompt:
 ```text
 Use the musexmachine-mcp-codex-env skill to create and validate a Codex-ready environment for musexmachine/mcp.
 ```
+
+## agentic-code-delivery-workflow
+
+Source: `hacker-news-comment (workflow pattern)`
+
+Sample prompt:
+```text
+Use the agentic-code-delivery-workflow skill to execute a refactor with plan iteration, spec-first thinking, tests-first implementation, manual verification, review, mutation testing, and docs updates.
+```
