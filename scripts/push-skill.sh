@@ -44,6 +44,20 @@ done
 
 [[ -n "$SKILL_PATH" ]] || err "--skill is required"
 [[ -d "$SKILL_PATH" ]] || err "Skill path not found: $SKILL_PATH"
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || err "Must be run inside a git worktree"
+REPO_ROOT="$(cd "$REPO_ROOT" && pwd -P)"
+SKILL_PATH="$(cd "$SKILL_PATH" && pwd -P)"
+
+if [[ "$SKILL_PATH" != "$REPO_ROOT" && "$SKILL_PATH" != "$REPO_ROOT"/* ]]; then
+  err "Skill path must be inside the current git repository: $SKILL_PATH"
+fi
+
+if [[ "$SKILL_PATH" == "$REPO_ROOT" ]]; then
+  SKILL_PATH="."
+else
+  SKILL_PATH="${SKILL_PATH#"$REPO_ROOT"/}"
+fi
 [[ -f "$SKILL_PATH/SKILL.md" ]] || err "Expected SKILL.md in $SKILL_PATH"
 
 if [[ "$OPEN_PR" -eq 1 && "$PUSH" -eq 0 ]]; then
