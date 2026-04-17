@@ -9,8 +9,9 @@ on:
     paths:
       - 'skills-manifest.json'
       - '**/SKILL.md'
-      # Keep this list aligned with top-level skill folders so non-SKILL file changes
-      # inside existing skills still trigger sync without broadening to docs/automation paths.
+      # Keep this list aligned with top-level skill folders, including when new skills are
+      # added, so non-SKILL file changes inside skills still trigger sync without broadening
+      # to docs/automation paths.
       - 'chrome-mcp-web-fallback/**'
       - 'code/**'
       - 'codespace-operator/**'
