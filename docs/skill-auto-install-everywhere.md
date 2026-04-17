@@ -19,8 +19,8 @@ Ensure every skill you create or update is installed predictably across all agen
    - Treat the manifest as the deployment contract for all platforms.
 
 3. **Idempotent installer entrypoint**
-   - Standardize one install command for all environments:
-     - `install-skill-from-github.py --repo <owner>/<repo> --path <skill-path> --ref <sha-or-tag>`
+   - Standardize one install/sync command for all environments:
+     - `./scripts/sync-skills.sh --repo <owner>/<repo> --ref <sha-or-tag>`
    - Never install from floating `main` in production workflows; pin versions.
 
 4. **Platform adapters (thin wrappers)**
