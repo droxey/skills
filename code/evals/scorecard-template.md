@@ -8,7 +8,7 @@
 
 ### Inputs
 - Prompt set file: `code/evals/trigger-prompts.jsonl`
-- Total prompts: 20
+- Total prompts: 27
 - Runs per prompt:
 
 ### Results
