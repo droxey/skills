@@ -45,7 +45,8 @@ print(m.get('repo', ''))
 print(m.get('repo_url', ''))
 print(m.get('ref', 'main'))
 print(m.get('channel', ''))
-print(len(m.get('skills', [])))
+valid = [s for s in m.get('skills', []) if s.get('name', '').strip() and s.get('path', '').strip()]
+print(len(valid))
 PY
 )
 
