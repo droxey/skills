@@ -118,7 +118,7 @@ And begin `/write-plan` using artifacts in `research/$DOMAIN` as canonical input
 ## Output contract (chat response)
 Return exactly these sections in order:
 1. `## Goal`
-2. `## Constraints`
+2. `## Guardrails`
 3. `## Capture Plan`
 4. `## Execution Log`
 5. `## Evidence Index`
