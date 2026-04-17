@@ -112,8 +112,9 @@ Never claim completion without command output evidence.
 
 If repository access fails:
 1. report exact failing command and error
-2. provide a minimal authenticated sequence:
-   - `gh auth login`
-   - `gh repo clone musexmachine/mcp`
-   - rerun the inspection/build/validate workflow
-3. mark environment status as **blocked on repo access**
+2. pick an authenticated path:
+   - if `gh` is available: `gh auth login` then `gh repo clone musexmachine/mcp`
+   - if `gh` is missing but Git auth is configured (SSH agent or credential helper): `git clone git@github.com:musexmachine/mcp.git` or `git clone https://github.com/musexmachine/mcp.git`
+   - otherwise, return a short setup plan (install `gh` or configure Git with PAT/SSH) without guessing secrets
+3. rerun the inspection/build/validate workflow after a successful clone
+4. mark environment status as **blocked on repo access** when cloning still fails
