@@ -1,3 +1,8 @@
+---
+name: prompt-technique-router
+description: Selects and applies the best-fit prompting technique for a task. Use when a user asks to improve prompt quality, reduce ambiguity, or choose a prompting strategy.
+---
+
 # Prompt Technique Router
 
 Use this skill when a user wants help improving a prompt, selecting a prompting strategy, restructuring a task for better model performance, or reducing ambiguity/failure risk before execution.
