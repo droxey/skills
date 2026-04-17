@@ -72,7 +72,11 @@ if [[ "$APPLY" -eq 0 ]]; then
 fi
 
 git fetch origin "$BASE_BRANCH"
-git switch "$BASE_BRANCH"
+if git show-ref --verify --quiet "refs/heads/$BASE_BRANCH"; then
+  git switch "$BASE_BRANCH"
+else
+  git switch -c "$BASE_BRANCH" --track "origin/$BASE_BRANCH"
+fi
 git pull --ff-only origin "$BASE_BRANCH"
 git switch -c "$BRANCH_NAME"
 git add "${FILES[@]}"
