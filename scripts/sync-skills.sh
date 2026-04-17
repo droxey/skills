@@ -37,7 +37,7 @@ command -v git >/dev/null || err "git is required"
 command -v python3 >/dev/null || err "python3 is required"
 [[ -f "$MANIFEST" ]] || err "Manifest not found: $MANIFEST"
 
-# Deterministic SHA-256 of a file or directory tree.
+# Deterministic SHA-256 of a file or directory tree, sorted by relative path.
 sha256_path() {
   python3 - "$1" <<'PY'
 from __future__ import annotations
@@ -49,10 +49,16 @@ import sys
 root = Path(sys.argv[1])
 digest = hashlib.sha256()
 
+def update_field(tag: bytes, value: bytes) -> None:
+    digest.update(tag)
+    digest.update(len(value).to_bytes(8, "big"))
+    digest.update(value)
+
 if root.is_file():
-    digest.update(b"F\0")
-    digest.update(root.name.encode("utf-8"))
-    digest.update(b"\0")
+    update_field(b"T", b"F")
+    update_field(b"P", root.name.encode("utf-8"))
+    digest.update(b"S")
+    digest.update(root.stat().st_size.to_bytes(8, "big"))
     with root.open("rb") as fh:
         for chunk in iter(lambda: fh.read(1024 * 1024), b""):
             digest.update(chunk)
@@ -60,17 +66,16 @@ else:
     for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
         rel = path.relative_to(root).as_posix()
         if path.is_dir():
-            digest.update(b"D\0")
-            digest.update(rel.encode("utf-8"))
-            digest.update(b"\0")
+            update_field(b"T", b"D")
+            update_field(b"P", rel.encode("utf-8"))
             continue
-        digest.update(b"F\0")
-        digest.update(rel.encode("utf-8"))
-        digest.update(b"\0")
+        update_field(b"T", b"F")
+        update_field(b"P", rel.encode("utf-8"))
+        digest.update(b"S")
+        digest.update(path.stat().st_size.to_bytes(8, "big"))
         with path.open("rb") as fh:
             for chunk in iter(lambda: fh.read(1024 * 1024), b""):
                 digest.update(chunk)
-        digest.update(b"\0")
 
 print(digest.hexdigest())
 PY

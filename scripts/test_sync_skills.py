@@ -28,7 +28,10 @@ class SyncSkillsTests(unittest.TestCase):
 
             skill_dir = source_repo / "example-skill"
             skill_dir.mkdir()
-            (skill_dir / "SKILL.md").write_text("# Example\n", encoding="utf-8")
+            (skill_dir / "SKILL.md").write_text(
+                "# Example Skill\n\n## Purpose\nValidate sync behavior.\n",
+                encoding="utf-8",
+            )
             (skill_dir / "prompts.md").write_text("first\n", encoding="utf-8")
             run(["git", "add", "."], cwd=source_repo)
             run(["git", "commit", "-m", "initial"], cwd=source_repo)
