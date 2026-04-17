@@ -39,11 +39,11 @@ Sample prompt:
 Use the musexmachine-mcp-codex-env skill to create and validate a Codex-ready environment for musexmachine/mcp.
 ```
 
-## chrome-mcp-web-fallback
+## skill-finder
 
 Source: local skill
 
 Sample prompt:
 ```text
-Use the chrome-mcp-web-fallback skill. If curl, web search, or other web requests fail, retry once with chrome-mcp and return both attempt outcomes.
+Use the skill-finder skill to locate the most relevant skill for a task and recommend the best match to use.
 ```
