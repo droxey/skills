@@ -47,3 +47,12 @@ Sample prompt:
 ```text
 Use the product-clone-research skill to run authenticated chrome-mcp reconnaissance for example.com, store artifacts in research/example.com, validate route/action coverage, then trigger "/brainstorm write a clone based on the files in research/example.com" and start /write-plan.
 ```
+
+## code
+
+Source: `hacker-news-comment (workflow pattern)`
+
+Sample prompt:
+```text
+Use the code skill to execute a refactor with plan iteration, spec-first thinking, tests-first implementation, manual verification, review, mutation testing, and docs updates.
+```
