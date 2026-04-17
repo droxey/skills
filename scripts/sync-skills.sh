@@ -38,7 +38,10 @@ command -v python3 >/dev/null || err "python3 is required"
 command -v sha256sum >/dev/null || err "sha256sum is required"
 [[ -f "$MANIFEST" ]] || err "Manifest not found: $MANIFEST"
 
-readarray -t META < <(python3 - "$MANIFEST" <<'PY'
+META=()
+while IFS= read -r line; do
+  META+=("$line")
+done < <(python3 - "$MANIFEST" <<'PY'
 import json, sys
 m = json.load(open(sys.argv[1], 'r', encoding='utf-8'))
 print(m.get('repo', ''))
