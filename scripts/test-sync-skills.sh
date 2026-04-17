@@ -57,6 +57,7 @@ SHA_LOG="$WORKDIR/sha.log"
 
 bash "$SYNC_SCRIPT" --manifest "$WORKDIR/manifest-branch.json" --dest "$DEST_DIR/branch" >"$BRANCH_LOG"
 grep -F "PLAN demo-skill -> $DEST_DIR/branch/demo-skill" "$BRANCH_LOG" >/dev/null
+[[ ! -e "$DEST_DIR/branch/demo-skill" ]]
 
 bash "$SYNC_SCRIPT" --manifest "$WORKDIR/manifest-sha.json" --dest "$DEST_DIR/sha" --apply >"$SHA_LOG"
 grep -F "UPDATED demo-skill" "$SHA_LOG" >/dev/null

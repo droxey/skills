@@ -31,7 +31,7 @@ clone_manifest_repo() {
   git clone --no-checkout --filter=blob:none --sparse "$repo_url" "$destination" >/dev/null
   (
     cd "$destination"
-    git fetch --depth 1 origin "$ref" >/dev/null
+    git fetch origin "$ref" >/dev/null
     git checkout --detach FETCH_HEAD >/dev/null
   )
 }
