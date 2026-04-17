@@ -22,7 +22,7 @@ class RunTriggerEvalTests(unittest.TestCase):
     def setUpClass(cls):
         cls.module = load_module()
 
-    def test_parse_bool_accepts_json_booleans_zero_one_integers_and_boolean_strings(self):
+    def test_parse_bool_accepts_multiple_boolean_formats(self):
         self.assertIs(self.module.parse_bool(True, "triggered", "T01"), True)
         self.assertIs(self.module.parse_bool(False, "triggered", "T01"), False)
         self.assertIs(self.module.parse_bool(1, "triggered", "T01"), True)
