@@ -1,5 +1,5 @@
 ---
-name: codespace-operator
+name: Codespace Operator
 description: Choose the lightest viable GitHub development surface, prefer Codespaces when runtime access is needed, and produce a safe validated execution plan for mobile/web chat workflows.
 allowed-tools: GitHub, browser, terminal, codespaces, gh, claude_remote_control
 ---
