@@ -56,6 +56,33 @@ Use this lightweight loop when a mutation framework is unavailable:
 
 Prefer deterministic, easy-to-revert mutations. Do not batch many mutants together.
 
+## Scoring and Evidence Gate
+
+Use this gate before marking work complete.
+
+### Mutation Testing Threshold
+
+- Run at least **5 mutants** across high-risk behaviors for medium/large changes.
+- Require a **mutant kill rate >= 80%** before closeout.
+- For surviving mutants, either:
+  - add tests until the mutant is killed, or
+  - document why the survivor is acceptable and what follow-up is required.
+
+### Required Evidence Template
+
+Record this block in the final report:
+
+```text
+Mutation Testing Evidence
+- Spec areas targeted:
+- Mutants introduced (id + bug type + location):
+- Mutants killed:
+- Mutants survived:
+- Kill rate (%):
+- Tests added/updated:
+- Justified survivors and follow-ups:
+```
+
 ## Scaling Guidance
 
 - **Trivial change**: compress steps 1-3 into a short plan and brief spec.
