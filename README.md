@@ -47,3 +47,12 @@ Sample prompt:
 ```text
 Use the code skill to execute a refactor with plan iteration, spec-first thinking, tests-first implementation, manual verification, review, mutation testing, and docs updates.
 ```
+
+## code
+
+Source: `hacker-news-comment (workflow pattern)`
+
+Sample prompt:
+```text
+Use the code skill to execute a refactor with plan iteration, spec-first thinking, tests-first implementation, manual verification, review, mutation testing, and docs updates.
+```
