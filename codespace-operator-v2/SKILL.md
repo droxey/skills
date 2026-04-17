@@ -1,5 +1,5 @@
 ---
-name: Codespace Operator
+name: codespace-operator-v2
 description: Select the lightest GitHub workspace mode, prefer Codespaces only when runtime is needed, and return a validated mobile/web execution plan.
 allowed-tools: GitHub, github.dev, Codespaces, gh, browser, terminal, claude_remote_control
 ---

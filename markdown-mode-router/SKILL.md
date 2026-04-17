@@ -1,3 +1,8 @@
+---
+name: markdown-mode-router
+description: Routes markdown work to teaching or general formatting mode. Use when a user asks to write, rewrite, or normalize markdown with minimal structural changes.
+---
+
 # Markdown Mode Router
 
 Use this skill before writing, rewriting, or normalizing a markdown file.
