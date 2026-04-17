@@ -24,17 +24,23 @@ def load_jsonl(path: Path) -> list[dict]:
 
 
 def parse_bool(value: object, field: str, row_id: str) -> bool:
-    """Parse a boolean field, accepting only JSON booleans or 0/1 integers.
+    """Parse a boolean field, accepting only strict boolean-like values.
 
-    Raises ValueError for any other type (including non-empty strings like
-    "false" which would silently evaluate as True with plain bool()).
+    Accepts JSON booleans, 0/1 integers, and case-insensitive "true"/"false"
+    strings. Raises ValueError for any other type or string value.
     """
     if isinstance(value, bool):
         return value
     if isinstance(value, int) and value in (0, 1):
         return bool(value)
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized == "true":
+            return True
+        if normalized == "false":
+            return False
     raise ValueError(
-        f"Row '{row_id}': field '{field}' must be a JSON boolean or 0/1 integer, got {type(value).__name__!r} {value!r}"
+        f"Row '{row_id}': field '{field}' must be a JSON boolean, true/false string, or 0/1 integer, got {type(value).__name__!r} {value!r}"
     )
 
 
