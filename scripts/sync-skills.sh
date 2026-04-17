@@ -35,8 +35,20 @@ done
 
 command -v git >/dev/null || err "git is required"
 command -v python3 >/dev/null || err "python3 is required"
-command -v sha256sum >/dev/null || err "sha256sum is required"
 [[ -f "$MANIFEST" ]] || err "Manifest not found: $MANIFEST"
+
+# Cross-platform SHA-256 helper
+sha256_file() {
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha256sum "$1" | awk '{print $1}'
+  elif command -v shasum >/dev/null 2>&1; then
+    shasum -a 256 "$1" | awk '{print $1}'
+  elif command -v openssl >/dev/null 2>&1; then
+    openssl dgst -sha256 "$1" | awk '{print $NF}'
+  else
+    err "No SHA-256 tool found (sha256sum, shasum, or openssl is required)"
+  fi
+}
 
 META=()
 while IFS= read -r line; do
@@ -72,7 +84,14 @@ TMPDIR="$(mktemp -d)"
 trap 'rm -rf "$TMPDIR"' EXIT
 
 log "Fetching ${REPO}@${REF}"
-git clone --depth 1 --branch "$REF" --filter=blob:none --sparse "$REPO_URL" "$TMPDIR/repo" >/dev/null
+if [[ "$REF" =~ ^[0-9a-fA-F]{40}$ ]]; then
+  # Full commit SHA: --branch doesn't accept SHAs; clone default then detach
+  git clone --filter=blob:none --sparse "$REPO_URL" "$TMPDIR/repo" >/dev/null 2>&1
+  ( cd "$TMPDIR/repo" && git checkout --detach "$REF" ) >/dev/null 2>&1
+else
+  # Branch or tag: shallow clone with --branch
+  git clone --depth 1 --branch "$REF" --filter=blob:none --sparse "$REPO_URL" "$TMPDIR/repo" >/dev/null 2>&1
+fi
 
 mapfile -t PATHS < <(python3 - "$MANIFEST" <<'PY'
 import json, sys
@@ -103,7 +122,7 @@ while IFS=$'\t' read -r NAME PATH_IN_REPO; do
     continue
   fi
 
-  SRC_HASH="$(sha256sum "$SRC_SKILL" | awk '{print $1}')"
+  SRC_HASH="$(sha256_file "$SRC_SKILL")"
   PREV_HASH=""
   PREV_REPO=""
   PREV_REF=""
