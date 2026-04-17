@@ -38,3 +38,12 @@ Sample prompt:
 ```text
 Use the musexmachine-mcp-codex-env skill to create and validate a Codex-ready environment for musexmachine/mcp.
 ```
+
+## skill-finder
+
+Source: local skill
+
+Sample prompt:
+```text
+Use the skill-finder skill. If curl, web search, or other web requests fail, retry with chrome-mcp and return the extracted result.
+```
