@@ -1,105 +1,136 @@
 ---
 name: product-clone-research
-description: Plan and execute structured product reconnaissance for open-source cloning efforts. Use when a user provides a product website and wants: (1) screenshots of all reachable unauthenticated pages, (2) authenticated capture after login with user-provided credentials or approved secret manager flow, and (3) a formal product research deliverable that summarizes IA, UX flows, feature surface, data model hints, and implementation implications.
+description: Run authenticated website reconnaissance with chrome-mcp for clone planning. Use when a user provides a domain and wants structured route/flow capture, high-resolution screenshots, workflow documentation, coverage validation, and a handoff prompt to begin clone planning from captured research artifacts.
 ---
 
-# Product Clone Research Operator
+# Product Clone Research Operator (chrome-mcp)
 
-Follow this workflow to capture product evidence and produce a reusable research brief for implementation.
+Use this workflow to map a target web product, capture evidence, and generate clone-ready research artifacts.
 
-## Output contract
+## Goal
+Create a reproducible research package in `research/$DOMAIN` that includes:
+- public and authenticated route inventory
+- workflow-level evidence with high-resolution screenshots
+- coverage report with explicit unknowns
+- product teardown and clone implementation handoff
+
+## Guardrails
+- Capture only pages and actions the user is authorized to access.
+- Never bypass authentication, CAPTCHA, paywalls, robots restrictions, or other security controls.
+- Never store plaintext credentials in repository files.
+- Redact secrets and user PII from logs and reports when possible.
+- If legal/ToS boundaries are unclear, stop and report blockers.
+
+## Hard truth on “complete coverage”
+Absolute proof of "every path" is usually impossible for modern apps (feature flags, role-gated UIs, time-based states, hidden APIs).
+
+Instead, enforce **defensible completeness**:
+1. Exhaustive crawl of all discoverable UI routes in scope.
+2. Deterministic action sweep for each discovered screen.
+3. Coverage manifest showing visited vs pending items.
+4. Explicit unknowns list and why each remains unverified.
+
+Do not claim full completion without this evidence.
+
+## Required inputs
+Collect or confirm before running:
+- `DOMAIN` and base URL
+- auth method (password, SSO, magic link, MFA)
+- credential source (manual entry, env vars, secret manager)
+- allowed scope (subdomains, roles, locales, billing/admin)
+- role matrix (e.g., admin, manager, member)
+- stop criteria (MVP flows only vs broad parity)
+
+## Directory contract
+Create and maintain:
+
+`research/$DOMAIN/`
+- `manifest.json` — route/action registry and status
+- `routes-public.csv`
+- `routes-authenticated.csv`
+- `actions.csv` — buttons/controls/actions found and execution status
+- `workflows.md` — end-to-end flow docs
+- `evidence/` — screenshots and page metadata
+- `coverage-report.md`
+- `product-teardown-report.md`
+- `clone-scope-recommendation.md`
+- `execution-log.md`
+
+Screenshot naming:
+- `evidence/<AUTH_STATE>/<ROUTE_ID>/<STEP_ID>--<STATE_TAG>.png`
+
+## Phase 1 — Public discovery
+1. Discover public pages via nav, footer, sitemap/robots hints, and internal links.
+2. Deduplicate and canonicalize URLs.
+3. For each route, capture:
+   - URL, title, timestamp, route id
+   - high-res screenshot (desktop baseline)
+   - outbound actions/controls detected
+4. Store results in `routes-public.csv` and `manifest.json`.
+
+## Phase 2 — Authenticated traversal with chrome-mcp
+1. Login through user-approved credential path.
+2. Traverse primary nav plus deep states:
+   - onboarding, empty/populated states, CRUD, settings, billing, support
+3. For each screen/state:
+   - capture high-resolution screenshot
+   - enumerate actionable controls (buttons, menu items, toggles, form submissions)
+   - execute safe actions to reveal downstream states
+4. Track discovered transitions as edges in `manifest.json`.
+5. Repeat traversal per approved role in scope.
+6. Clear session artifacts at end.
+
+## Phase 3 — Workflow documentation
+Build `workflows.md` with each workflow containing:
+- objective
+- prerequisites/role
+- start URL
+- ordered UI steps
+- expected outcomes
+- screenshots
+- branch/exception paths
+
+## Phase 4 — Coverage validation
+Generate `coverage-report.md` with:
+- discovered routes count (public/auth by role)
+- visited route count
+- discovered actionable controls count
+- executed control count
+- blocked/unverified items with reasons
+- confidence score by module (high/medium/low)
+
+Completion gate:
+- all discovered in-scope routes visited OR marked blocked with reason
+- all discovered in-scope actions executed OR marked unsafe/blocked with reason
+- unknowns explicitly listed
+
+## Phase 5 — Synthesis and clone handoff
+Produce:
+- `product-teardown-report.md`
+- `clone-scope-recommendation.md`
+
+Then issue this exact handoff prompt:
+
+`/brainstorm write a clone based on the files in research/$DOMAIN`
+
+And begin `/write-plan` using artifacts in `research/$DOMAIN` as canonical input.
+
+## Output contract (chat response)
 Return exactly these sections in order:
-
 1. `## Goal`
-2. `## Constraints`
+2. `## Guardrails`
 3. `## Capture Plan`
 4. `## Execution Log`
 5. `## Evidence Index`
-6. `## Product Teardown Report`
-7. `## Clone Scope Recommendation`
-8. `## Risks / Unknowns`
-
-## Naming
-Use these terms consistently:
-- `Product Teardown Report`: comprehensive analysis of UX, features, and architecture clues.
-- `Clone Scope Recommendation`: proposed MVP and phased parity plan.
-
-If user asks for a shorter label, allow `Product Research Report` as alias.
-
-## Guardrails
-- Capture only pages the user is authorized to access.
-- Never bypass authentication, paywalls, CAPTCHA, robots, or security controls.
-- Never store plaintext credentials in repo files or chat logs.
-- Prefer ephemeral secret injection and redact secrets in logs.
-- Stop and report if terms/legal boundaries are unclear.
-
-## Inputs required
-Collect or confirm:
-- Target base URL.
-- Authentication method (password, SSO, magic link, MFA, etc.).
-- Credential source (manual entry, secret manager, 1Password CLI, env vars).
-- Scope boundaries (subdomains, locales, billing/admin pages).
-- Output depth (MVP only vs full parity).
-
-## Phase 1: Discovery and unauthenticated capture
-1. Map public routes:
-   - Parse navigation, footer, robots/sitemap references, and in-app links.
-   - Build a deduplicated route list (canonical URL, page type, discovery source).
-2. Capture each reachable public route:
-   - Take deterministic screenshots (desktop baseline; optionally mobile).
-   - Record page title, URL, timestamp, auth state=`public`.
-3. Note broken links, gated transitions, and dynamic states requiring auth.
-
-## Phase 2: Authenticated capture
-1. Authenticate safely:
-   - Use user-approved credential path.
-   - Prefer non-persistent session strategy.
-2. Enumerate authenticated routes:
-   - Traverse primary nav, settings, onboarding, empty states, CRUD flows, and account pages.
-   - Trigger meaningful states (create/edit/delete previews when safe).
-3. Capture evidence per route/state:
-   - Screenshot with stable viewport.
-   - Log URL, title, state tags (e.g., `dashboard-empty`, `project-detail-populated`), timestamp, auth state=`authenticated`.
-4. Terminate session and clear session artifacts when complete.
-
-## Phase 3: Synthesis and reporting
-Build a `Product Teardown Report` with:
-- Product summary: user segment, core jobs-to-be-done, value loop.
-- Information architecture: sitemap and role-based route map.
-- UX flow inventory: onboarding, activation, recurring use, settings, billing, support.
-- Feature decomposition: modules, key entities, permissions, edge states.
-- UI system notes: layout patterns, component families, interaction patterns.
-- Technical inference: likely backend domains, integrations, events, and constraints inferred from UI only (mark inferences explicitly).
-- Clone complexity: low/medium/high by module with rationale.
-
-Then build `Clone Scope Recommendation`:
-- MVP scope (must-clone now).
-- Phase 2/3 backlog (later parity).
-- Suggested architecture and build order.
-- Risks, assumptions, and validation experiments.
-
-## Evidence format
-Create an evidence table with columns:
-- `id`
-- `auth_state`
-- `url`
-- `page_or_flow`
-- `screenshot_path`
-- `captured_at_utc`
-- `notes`
-
-Use stable IDs like `PUB-001`, `AUTH-001`.
-
-## Minimum completion criteria
-Do not claim completion until all are true:
-- Public routes captured or explicitly marked unreachable.
-- Authenticated routes captured within agreed scope.
-- Evidence index is complete and linked to screenshots.
-- Product Teardown Report and Clone Scope Recommendation delivered.
-- Unknowns and assumptions explicitly listed.
+6. `## Coverage Report`
+7. `## Product Teardown Report`
+8. `## Clone Scope Recommendation`
+9. `## Risks / Unknowns`
+10. `## Handoff Triggered`
 
 ## Failure handling
-If blocked by login, MFA, bot defenses, or legal constraints:
-- Stop immediately.
-- Provide partial deliverables from available evidence.
-- Return a precise blocker list and next actions needed from user.
+If blocked by auth, MFA, legal constraints, anti-bot controls, or environment/tool limits:
+- stop at boundary
+- produce partial artifacts
+- list exact blockers and next required user actions
+- do not claim full completion

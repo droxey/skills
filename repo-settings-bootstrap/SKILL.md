@@ -1,3 +1,8 @@
+---
+name: repo-settings-bootstrap
+description: Bootstraps repository settings-as-code artifacts such as .github/settings.yml and related governance defaults. Use when a repo needs initial policy scaffolding with minimal safe changes.
+---
+
 # Skill: Repo Settings Bootstrap v2
 
 ## Purpose
