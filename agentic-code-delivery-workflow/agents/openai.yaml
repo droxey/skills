@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agentic Code Workflow"
-  short_description: "Plan-spec-test-verify-review-mutate delivery flow."
-  default_prompt: "Use the agentic-code-delivery-workflow skill to run a coding task through discussion, planning, spec writing, tests-first implementation, manual verification, review, mutation testing, and documentation updates."

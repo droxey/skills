@@ -1,9 +1,9 @@
 ---
-name: agentic-code-delivery-workflow
+name: code
 description: "Structured workflow for writing or refactoring code with an AI agent: discuss, iterate on a plan, capture a spec, implement tests-first, manually verify behavior, review with another pass, run mutation testing, and update docs/artifacts. Use when building non-trivial code changes where quality gates and regression resistance matter."
 ---
 
-# Agentic Code Delivery Workflow
+# Code
 
 Use this workflow to deliver reliable code changes without depending on special frameworks.
 
