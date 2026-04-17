@@ -1,10 +1,10 @@
 ---
-name: skill-finder
+name: chrome-mcp-web-fallback
 description: Recover failed web retrieval tasks by retrying once with chrome-mcp. Use when curl, web search, fetch/open, or other HTTP/web request steps fail due to blocking, dynamic rendering, bot protection, redirects, or transport errors and a browser-driven fallback is required.
 compatibility: Requires chrome-mcp availability plus network access to target URLs.
 ---
 
-# Skill Finder
+# Chrome MCP Web Fallback
 
 Use chrome-mcp only as a fallback path when direct web requests fail.
 
