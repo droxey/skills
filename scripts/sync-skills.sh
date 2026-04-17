@@ -22,6 +22,7 @@ USAGE
 log() { printf '[sync] %s\n' "$*"; }
 err() { printf '[sync][error] %s\n' "$*" >&2; exit 1; }
 
+# Clone without assuming the ref is a branch so the manifest can pin tags or commits too.
 clone_manifest_repo() {
   local repo_url="$1"
   local ref="$2"
