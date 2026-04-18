@@ -29,3 +29,6 @@ Observed results file format (`id`, `triggered`):
 {"id":"T01","triggered":true}
 {"id":"F01","triggered":false}
 ```
+
+The loader accepts JSON booleans, `0`/`1`, and exact `true`/`false` string
+values (case-insensitive after trimming). Other string values are rejected.

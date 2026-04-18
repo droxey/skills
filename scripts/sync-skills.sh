@@ -85,7 +85,10 @@ trap 'rm -rf "$TMPDIR"' EXIT
 log "Fetching ${REPO}@${REF}"
 clone_manifest_repo "$REPO_URL" "$REF" "$TMPDIR/repo"
 
-mapfile -t PATHS < <(python3 - "$MANIFEST" <<'PY'
+PATHS=()
+while IFS= read -r line; do
+  PATHS+=("$line")
+done < <(python3 - "$MANIFEST" <<'PY'
 import json, sys
 m = json.load(open(sys.argv[1], 'r', encoding='utf-8'))
 for s in m.get('skills', []):
@@ -144,7 +147,7 @@ while IFS=$'\t' read -r NAME PATH_IN_REPO; do
 repo=$REPO
 ref=$REF
 path=$PATH_IN_REPO
-skill_md_sha256=$SRC_HASH
+skill_dir_sha256=$SRC_HASH
 installed_at=$TS
 MARKER
   log "UPDATED $NAME"
