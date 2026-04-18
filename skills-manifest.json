@@ -1,0 +1,10 @@
+{
+  "version": "2026-04-17",
+  "channel": "dev",
+  "repo": "droxey/skills",
+  "ref": "2026-04-17",
+  "skills": [
+    { "name": "model-cost-estimator", "path": "model-cost-estimator" },
+    { "name": "musexmachine-mcp-codex-env", "path": "musexmachine-mcp-codex-env" }
+  ]
+}

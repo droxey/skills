@@ -23,6 +23,32 @@ def load_jsonl(path: Path) -> list[dict]:
     return rows
 
 
+def parse_bool(value: object, field: str, row_id: str) -> bool:
+    """Parse a boolean field, accepting only JSON booleans or 0/1 integers.
+
+    Raises ValueError for any other type (including non-empty strings like
+    "false" which would silently evaluate as True with plain bool()).
+    """
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, int) and value in (0, 1):
+        return bool(value)
+    raise ValueError(
+        f"Row '{row_id}': field '{field}' must be a JSON boolean or 0/1 integer, got {type(value).__name__!r} {value!r}"
+    )
+
+
+def build_index(rows: list[dict], bool_field: str, source: str) -> dict[str, bool]:
+    """Build an id→bool mapping, raising an error on duplicate ids or invalid bool values."""
+    index: dict[str, bool] = {}
+    for row in rows:
+        row_id = row["id"]
+        if row_id in index:
+            raise ValueError(f"Duplicate id {row_id!r} found in {source}")
+        index[row_id] = parse_bool(row[bool_field], bool_field, row_id)
+    return index
+
+
 def safe_div(num: int, den: int) -> float:
     return (num / den) if den else 0.0
 
@@ -54,8 +80,8 @@ def main() -> int:
     expected_rows = load_jsonl(expected_path)
     observed_rows = load_jsonl(observed_path)
 
-    expected = {row["id"]: bool(row["should_trigger"]) for row in expected_rows}
-    observed = {row["id"]: bool(row["triggered"]) for row in observed_rows}
+    expected = build_index(expected_rows, "should_trigger", args.expected)
+    observed = build_index(observed_rows, "triggered", args.observed)
 
     missing = sorted(set(expected) - set(observed))
     extra = sorted(set(observed) - set(expected))
