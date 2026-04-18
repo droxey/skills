@@ -7,6 +7,13 @@ description: "Structured workflow for writing or refactoring code with an AI age
 
 Use this workflow to deliver reliable code changes without depending on special frameworks.
 
+## Do Not Use For
+
+- Docs-only edits (typos, formatting, wording-only README updates).
+- Translation, summarization, or general writing tasks with no code change.
+- One-off snippet/Q&A requests that do not need plan/spec/test/verify gates.
+- Narrow debugging asks when the user only wants a quick hypothesis or fix.
+
 ## Core Flow
 
 1. **Discuss the change with an agent**
@@ -62,6 +69,7 @@ Use this gate before marking work complete.
 
 ### Mutation Testing Threshold
 
+- Treat changes as **medium/large** when they modify production logic across multiple files, control-flow branches, or externally visible behavior.
 - Run at least **5 mutants** across high-risk behaviors for medium/large changes.
 - Require a **mutant kill rate >= 80%** before closeout.
 - For surviving mutants, either:
