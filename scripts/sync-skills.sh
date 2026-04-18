@@ -37,17 +37,48 @@ command -v git >/dev/null || err "git is required"
 command -v python3 >/dev/null || err "python3 is required"
 [[ -f "$MANIFEST" ]] || err "Manifest not found: $MANIFEST"
 
-# Cross-platform SHA-256 helper
-sha256_file() {
-  if command -v sha256sum >/dev/null 2>&1; then
-    sha256sum "$1" | awk '{print $1}'
-  elif command -v shasum >/dev/null 2>&1; then
-    shasum -a 256 "$1" | awk '{print $1}'
-  elif command -v openssl >/dev/null 2>&1; then
-    openssl dgst -sha256 "$1" | awk '{print $NF}'
-  else
-    err "No SHA-256 tool found (sha256sum, shasum, or openssl is required)"
-  fi
+# Deterministic SHA-256 of a file or directory tree, sorted by relative path.
+sha256_path() {
+  python3 - "$1" <<'PY'
+from __future__ import annotations
+
+import hashlib
+from pathlib import Path
+import sys
+
+root = Path(sys.argv[1])
+digest = hashlib.sha256()
+
+def update_field(tag: bytes, value: bytes) -> None:
+    digest.update(tag)
+    digest.update(len(value).to_bytes(8, "big"))
+    digest.update(value)
+
+if root.is_file():
+    update_field(b"T", b"F")
+    update_field(b"P", root.name.encode("utf-8"))
+    digest.update(b"S")
+    digest.update(root.stat().st_size.to_bytes(8, "big"))
+    with root.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            digest.update(chunk)
+else:
+    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
+        rel = path.relative_to(root).as_posix()
+        if path.is_dir():
+            update_field(b"T", b"D")
+            update_field(b"P", rel.encode("utf-8"))
+            continue
+        update_field(b"T", b"F")
+        update_field(b"P", rel.encode("utf-8"))
+        digest.update(b"S")
+        digest.update(path.stat().st_size.to_bytes(8, "big"))
+        with path.open("rb") as fh:
+            for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+                digest.update(chunk)
+
+print(digest.hexdigest())
+PY
 }
 
 META=()
@@ -122,13 +153,13 @@ while IFS=$'\t' read -r NAME PATH_IN_REPO; do
     continue
   fi
 
-  SRC_HASH="$(sha256_file "$SRC_SKILL")"
+  SRC_HASH="$(sha256_path "$SRC")"
   PREV_HASH=""
   PREV_REPO=""
   PREV_REF=""
   PREV_PATH=""
   if [[ -f "$MARKER" ]]; then
-    PREV_HASH="$(awk -F'=' '/^skill_md_sha256=/{print $2}' "$MARKER" | tr -d '[:space:]')"
+    PREV_HASH="$(awk -F'=' '/^skill_dir_sha256=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '[:space:]')"
     PREV_REPO="$(awk -F'=' '/^repo=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
     PREV_REF="$(awk -F'=' '/^ref=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
     PREV_PATH="$(awk -F'=' '/^path=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
@@ -158,7 +189,7 @@ while IFS=$'\t' read -r NAME PATH_IN_REPO; do
 repo=$REPO
 ref=$REF
 path=$PATH_IN_REPO
-skill_md_sha256=$SRC_HASH
+skill_dir_sha256=$SRC_HASH
 installed_at=$TS
 MARKER
   log "UPDATED $NAME"
