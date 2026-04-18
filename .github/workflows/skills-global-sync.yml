@@ -13,6 +13,8 @@ jobs:
   sync-smoke:
     name: sync-smoke-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -34,6 +36,8 @@ jobs:
     name: sync-apply-opt-in-${{ matrix.os }}
     if: vars.GLOBAL_SYNC_APPLY == 'true'
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     needs: [sync-smoke]
     strategy:
       fail-fast: false
