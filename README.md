@@ -39,6 +39,15 @@ Sample prompt:
 Use the musexmachine-mcp-codex-env skill to create and validate a Codex-ready environment for musexmachine/mcp.
 ```
 
+## product-clone-research
+
+Source: `local skill catalog`
+
+Sample prompt:
+```text
+Use the product-clone-research skill to run authenticated chrome-mcp reconnaissance for example.com, store artifacts in research/example.com, validate route/action coverage, then trigger "/brainstorm write a clone based on the files in research/example.com" and start /write-plan.
+```
+
 ## code
 
 Source: `hacker-news-comment (workflow pattern)`
