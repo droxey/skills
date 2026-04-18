@@ -22,6 +22,20 @@ USAGE
 log() { printf '[sync] %s\n' "$*"; }
 err() { printf '[sync][error] %s\n' "$*" >&2; exit 1; }
 
+# Clone without assuming the ref is a branch so the manifest can pin tags or commits too.
+clone_manifest_repo() {
+  local repo_url="$1"
+  local ref="$2"
+  local destination="$3"
+
+  git clone --no-checkout --filter=blob:none --sparse "$repo_url" "$destination" >/dev/null
+  (
+    cd "$destination"
+    git fetch origin "$ref" >/dev/null
+    git checkout --detach FETCH_HEAD >/dev/null
+  )
+}
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --manifest) MANIFEST="$2"; shift 2 ;;
@@ -35,56 +49,10 @@ done
 
 command -v git >/dev/null || err "git is required"
 command -v python3 >/dev/null || err "python3 is required"
+command -v sha256sum >/dev/null || err "sha256sum is required"
 [[ -f "$MANIFEST" ]] || err "Manifest not found: $MANIFEST"
 
-# Deterministic SHA-256 of a file or directory tree, sorted by relative path.
-sha256_path() {
-  python3 - "$1" <<'PY'
-from __future__ import annotations
-
-import hashlib
-from pathlib import Path
-import sys
-
-root = Path(sys.argv[1])
-digest = hashlib.sha256()
-
-def update_field(tag: bytes, value: bytes) -> None:
-    digest.update(tag)
-    digest.update(len(value).to_bytes(8, "big"))
-    digest.update(value)
-
-if root.is_file():
-    update_field(b"T", b"F")
-    update_field(b"P", root.name.encode("utf-8"))
-    digest.update(b"S")
-    digest.update(root.stat().st_size.to_bytes(8, "big"))
-    with root.open("rb") as fh:
-        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
-            digest.update(chunk)
-else:
-    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
-        rel = path.relative_to(root).as_posix()
-        if path.is_dir():
-            update_field(b"T", b"D")
-            update_field(b"P", rel.encode("utf-8"))
-            continue
-        update_field(b"T", b"F")
-        update_field(b"P", rel.encode("utf-8"))
-        digest.update(b"S")
-        digest.update(path.stat().st_size.to_bytes(8, "big"))
-        with path.open("rb") as fh:
-            for chunk in iter(lambda: fh.read(1024 * 1024), b""):
-                digest.update(chunk)
-
-print(digest.hexdigest())
-PY
-}
-
-META=()
-while IFS= read -r line; do
-  META+=("$line")
-done < <(python3 - "$MANIFEST" <<'PY'
+readarray -t META < <(python3 - "$MANIFEST" <<'PY'
 import json, sys
 m = json.load(open(sys.argv[1], 'r', encoding='utf-8'))
 print(m.get('repo', ''))
@@ -115,14 +83,7 @@ TMPDIR="$(mktemp -d)"
 trap 'rm -rf "$TMPDIR"' EXIT
 
 log "Fetching ${REPO}@${REF}"
-if [[ "$REF" =~ ^[0-9a-fA-F]{40}$ ]]; then
-  # Full commit SHA: --branch doesn't accept SHAs; clone default then detach
-  git clone --filter=blob:none --sparse "$REPO_URL" "$TMPDIR/repo" >/dev/null 2>&1
-  ( cd "$TMPDIR/repo" && git checkout --detach "$REF" ) >/dev/null 2>&1
-else
-  # Branch or tag: shallow clone with --branch
-  git clone --depth 1 --branch "$REF" --filter=blob:none --sparse "$REPO_URL" "$TMPDIR/repo" >/dev/null 2>&1
-fi
+clone_manifest_repo "$REPO_URL" "$REF" "$TMPDIR/repo"
 
 PATHS=()
 while IFS= read -r line; do
@@ -156,19 +117,13 @@ while IFS=$'\t' read -r NAME PATH_IN_REPO; do
     continue
   fi
 
-  SRC_HASH="$(sha256_path "$SRC")"
+  SRC_HASH="$(sha256sum "$SRC_SKILL" | awk '{print $1}')"
   PREV_HASH=""
-  PREV_REPO=""
-  PREV_REF=""
-  PREV_PATH=""
   if [[ -f "$MARKER" ]]; then
-    PREV_HASH="$(awk -F'=' '/^skill_dir_sha256=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '[:space:]')"
-    PREV_REPO="$(awk -F'=' '/^repo=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
-    PREV_REF="$(awk -F'=' '/^ref=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
-    PREV_PATH="$(awk -F'=' '/^path=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
+    PREV_HASH="$(awk -F'=' '/^skill_md_sha256=/{print $2}' "$MARKER" | tr -d '[:space:]')"
   fi
 
-  if [[ -d "$TARGET" && "$PREV_HASH" == "$SRC_HASH" && "$PREV_REPO" == "$REPO" && "$PREV_REF" == "$REF" && "$PREV_PATH" == "$PATH_IN_REPO" ]]; then
+  if [[ -d "$TARGET" && "$PREV_HASH" == "$SRC_HASH" ]]; then
     log "UNCHANGED $NAME"
     UNCHANGED=$((UNCHANGED + 1))
     continue
