@@ -124,7 +124,10 @@ else
   git clone --depth 1 --branch "$REF" --filter=blob:none --sparse "$REPO_URL" "$TMPDIR/repo" >/dev/null 2>&1
 fi
 
-mapfile -t PATHS < <(python3 - "$MANIFEST" <<'PY'
+PATHS=()
+while IFS= read -r line; do
+  PATHS+=("$line")
+done < <(python3 - "$MANIFEST" <<'PY'
 import json, sys
 m = json.load(open(sys.argv[1], 'r', encoding='utf-8'))
 for s in m.get('skills', []):
