@@ -1,12 +1,32 @@
 name: skills-global-sync
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [main]
     paths:
       - 'skills-manifest.json'
-      - 'scripts/sync-skills.sh'
       - '**/SKILL.md'
+      # Keep this list aligned with top-level skill folders, including when new skills are
+      # added, so non-SKILL file changes inside skills still trigger sync without broadening
+      # to docs/automation paths.
+      - 'chrome-mcp-web-fallback/**'
+      - 'code/**'
+      - 'codespace-operator/**'
+      - 'codespace-operator-v2/**'
+      - 'dani-roxberrys-teaching-voice/**'
+      - 'intake-implementation-workflow/**'
+      - 'markdown-mode-router/**'
+      - 'model-cost-estimator/**'
+      - 'musexmachine-mcp-codex-env/**'
+      - 'perceptis-manual-import-connector/**'
+      - 'perceptyx-read-only-export-validation-and-scaffold/**'
+      - 'product-clone-research/**'
+      - 'prompt-technique-router/**'
+      - 'repo-settings-bootstrap/**'
+      - 'resume-ats-pdf-optimizer/**'
   workflow_dispatch:
 
 jobs:
