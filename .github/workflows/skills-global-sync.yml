@@ -1,20 +1,43 @@
 name: skills-global-sync
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [main]
     paths:
       - 'skills-manifest.json'
       - 'scripts/sync-skills.sh'
+      - 'scripts/test-sync-skills.sh'
       - '**/SKILL.md'
+      # Keep this list aligned with top-level skill folders, including when new skills are
+      # added, so non-SKILL file changes inside skills still trigger sync without broadening
+      # to docs/automation paths.
+      - 'chrome-mcp-web-fallback/**'
+      - 'code/**'
+      - 'codespace-operator/**'
+      - 'codespace-operator-v2/**'
+      - 'dani-roxberrys-teaching-voice/**'
+      - 'intake-implementation-workflow/**'
+      - 'markdown-mode-router/**'
+      - 'model-cost-estimator/**'
+      - 'musexmachine-mcp-codex-env/**'
+      - 'perceptis-manual-import-connector/**'
+      - 'perceptyx-read-only-export-validation-and-scaffold/**'
+      - 'product-clone-research/**'
+      - 'prompt-technique-router/**'
+      - 'repo-settings-bootstrap/**'
+      - 'resume-ats-pdf-optimizer/**'
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   sync-smoke:
     name: sync-smoke-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    permissions:
-      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -26,7 +49,12 @@ jobs:
         shell: bash
         run: |
           bash -n scripts/sync-skills.sh
+          bash -n scripts/test-sync-skills.sh
           python3 -m json.tool skills-manifest.json >/dev/null
+      - name: Test branch and commit SHA refs
+        shell: bash
+        run: |
+          bash scripts/test-sync-skills.sh
       - name: Dry-run sync
         shell: bash
         run: |
@@ -36,8 +64,6 @@ jobs:
     name: sync-apply-opt-in-${{ matrix.os }}
     if: vars.GLOBAL_SYNC_APPLY == 'true'
     runs-on: ${{ matrix.os }}
-    permissions:
-      contents: read
     needs: [sync-smoke]
     strategy:
       fail-fast: false

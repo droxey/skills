@@ -22,6 +22,20 @@ USAGE
 log() { printf '[sync] %s\n' "$*"; }
 err() { printf '[sync][error] %s\n' "$*" >&2; exit 1; }
 
+# Clone without assuming the ref is a branch so the manifest can pin tags or commits too.
+clone_manifest_repo() {
+  local repo_url="$1"
+  local ref="$2"
+  local destination="$3"
+
+  git clone --no-checkout --filter=blob:none --sparse "$repo_url" "$destination" >/dev/null
+  (
+    cd "$destination"
+    git fetch origin "$ref" >/dev/null
+    git checkout --detach FETCH_HEAD >/dev/null
+  )
+}
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --manifest) MANIFEST="$2"; shift 2 ;;
@@ -35,25 +49,10 @@ done
 
 command -v git >/dev/null || err "git is required"
 command -v python3 >/dev/null || err "python3 is required"
+command -v sha256sum >/dev/null || err "sha256sum is required"
 [[ -f "$MANIFEST" ]] || err "Manifest not found: $MANIFEST"
 
-# Cross-platform SHA-256 helper
-sha256_file() {
-  if command -v sha256sum >/dev/null 2>&1; then
-    sha256sum "$1" | awk '{print $1}'
-  elif command -v shasum >/dev/null 2>&1; then
-    shasum -a 256 "$1" | awk '{print $1}'
-  elif command -v openssl >/dev/null 2>&1; then
-    openssl dgst -sha256 "$1" | awk '{print $NF}'
-  else
-    err "No SHA-256 tool found (sha256sum, shasum, or openssl is required)"
-  fi
-}
-
-META=()
-while IFS= read -r line; do
-  META+=("$line")
-done < <(python3 - "$MANIFEST" <<'PY'
+readarray -t META < <(python3 - "$MANIFEST" <<'PY'
 import json, sys
 m = json.load(open(sys.argv[1], 'r', encoding='utf-8'))
 print(m.get('repo', ''))
@@ -84,16 +83,12 @@ TMPDIR="$(mktemp -d)"
 trap 'rm -rf "$TMPDIR"' EXIT
 
 log "Fetching ${REPO}@${REF}"
-if [[ "$REF" =~ ^[0-9a-fA-F]{40}$ ]]; then
-  # Full commit SHA: --branch doesn't accept SHAs; clone default then detach
-  git clone --filter=blob:none --sparse "$REPO_URL" "$TMPDIR/repo" >/dev/null 2>&1
-  ( cd "$TMPDIR/repo" && git checkout --detach "$REF" ) >/dev/null 2>&1
-else
-  # Branch or tag: shallow clone with --branch
-  git clone --depth 1 --branch "$REF" --filter=blob:none --sparse "$REPO_URL" "$TMPDIR/repo" >/dev/null 2>&1
-fi
+clone_manifest_repo "$REPO_URL" "$REF" "$TMPDIR/repo"
 
-mapfile -t PATHS < <(python3 - "$MANIFEST" <<'PY'
+PATHS=()
+while IFS= read -r line; do
+  PATHS+=("$line")
+done < <(python3 - "$MANIFEST" <<'PY'
 import json, sys
 m = json.load(open(sys.argv[1], 'r', encoding='utf-8'))
 for s in m.get('skills', []):
@@ -122,19 +117,13 @@ while IFS=$'\t' read -r NAME PATH_IN_REPO; do
     continue
   fi
 
-  SRC_HASH="$(sha256_file "$SRC_SKILL")"
+  SRC_HASH="$(sha256sum "$SRC_SKILL" | awk '{print $1}')"
   PREV_HASH=""
-  PREV_REPO=""
-  PREV_REF=""
-  PREV_PATH=""
   if [[ -f "$MARKER" ]]; then
     PREV_HASH="$(awk -F'=' '/^skill_md_sha256=/{print $2}' "$MARKER" | tr -d '[:space:]')"
-    PREV_REPO="$(awk -F'=' '/^repo=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
-    PREV_REF="$(awk -F'=' '/^ref=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
-    PREV_PATH="$(awk -F'=' '/^path=/{print substr($0, index($0, "=") + 1)}' "$MARKER" | tr -d '\r')"
   fi
 
-  if [[ -d "$TARGET" && "$PREV_HASH" == "$SRC_HASH" && "$PREV_REPO" == "$REPO" && "$PREV_REF" == "$REF" && "$PREV_PATH" == "$PATH_IN_REPO" ]]; then
+  if [[ -d "$TARGET" && "$PREV_HASH" == "$SRC_HASH" ]]; then
     log "UNCHANGED $NAME"
     UNCHANGED=$((UNCHANGED + 1))
     continue
@@ -158,7 +147,7 @@ while IFS=$'\t' read -r NAME PATH_IN_REPO; do
 repo=$REPO
 ref=$REF
 path=$PATH_IN_REPO
-skill_md_sha256=$SRC_HASH
+skill_dir_sha256=$SRC_HASH
 installed_at=$TS
 MARKER
   log "UPDATED $NAME"
