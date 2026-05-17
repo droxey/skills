@@ -1,0 +1,27 @@
+{"id":"T01","should_trigger":true,"prompt":"Refactor our payment retry logic. I want a plan first, then a spec, tests first, and a mutation-testing pass before merge.","reason":"Explicitly asks for the full workflow including mutation testing."}
+{"id":"T02","should_trigger":true,"prompt":"Help me implement a non-trivial backend change with acceptance criteria, test-first coding, manual verification, and docs updates.","reason":"Matches plan/spec/test/verify/docs workflow for non-trivial code."}
+{"id":"T03","should_trigger":true,"prompt":"I need a safe rollout for a refactor. Start by discussing scope and risks, then iterate on a concrete implementation plan.","reason":"Requests early workflow phases for a code refactor."}
+{"id":"T04","should_trigger":true,"prompt":"Please act as a coding operator: write spec, add tests, implement, run review, and prove tests catch injected bugs.","reason":"Directly requests mutation-style validation and end-to-end flow."}
+{"id":"T05","should_trigger":true,"prompt":"Build this feature with milestones, each having plan, spec, tests, manual QA, and review.","reason":"Large-change scaling guidance aligns with skill."}
+{"id":"T06","should_trigger":true,"prompt":"I want to rewrite this module and avoid regressions. Use tests-first and include survivor analysis for mutation checks.","reason":"Strong mutation/testing gate request."}
+{"id":"T07","should_trigger":true,"prompt":"Turn this code request into a delivery workflow with acceptance criteria and verification evidence.","reason":"Requests process-oriented coding workflow output."}
+{"id":"T08","should_trigger":true,"prompt":"For this API refactor, do discuss -> plan -> spec -> implement -> verify -> review, then summarize residual risk.","reason":"Maps almost 1:1 to the skill steps."}
+{"id":"T09","should_trigger":true,"prompt":"Guide me through a disciplined coding process that includes manual checks and doc updates after implementation.","reason":"Core workflow intent for non-trivial code tasks."}
+{"id":"T10","should_trigger":true,"prompt":"We need stronger test confidence. Add plausible bugs one-by-one and confirm tests fail before sign-off.","reason":"Mutation testing playbook trigger."}
+{"id":"T11","should_trigger":true,"prompt":"I need a safe refactor plan and proof our tests fail on intentional bugs before we ship.","reason":"Adversarial phrasing still requests workflow plus mutation evidence."}
+{"id":"T12","should_trigger":true,"prompt":"Can you keep this implementation disciplined: plan, acceptance criteria, tests first, manual QA, and final risk notes?","reason":"Vague phrasing but clearly asks for the full delivery workflow."}
+{"id":"F01","should_trigger":false,"prompt":"Fix a typo in README and do not change code or tests.","reason":"Docs-only trivial task; workflow is unnecessary."}
+{"id":"F02","should_trigger":false,"prompt":"Summarize this meeting transcript into bullet points.","reason":"Non-coding summarization request."}
+{"id":"F03","should_trigger":false,"prompt":"Translate this paragraph to Spanish.","reason":"Translation task, not code workflow."}
+{"id":"F04","should_trigger":false,"prompt":"List npm commands to start a React app.","reason":"Simple Q&A, no workflow execution requested."}
+{"id":"F05","should_trigger":false,"prompt":"Design a product strategy memo for next quarter.","reason":"Business planning task, not implementation workflow."}
+{"id":"F06","should_trigger":false,"prompt":"Create a logo concept for our brand refresh.","reason":"Creative design task outside code delivery."}
+{"id":"F07","should_trigger":false,"prompt":"Give me a regex that validates email addresses.","reason":"Single snippet request; full workflow overkill."}
+{"id":"F08","should_trigger":false,"prompt":"Explain what mutation testing is in plain English.","reason":"Conceptual explanation only; no coding execution."}
+{"id":"F09","should_trigger":false,"prompt":"Draft a polite follow-up email to a recruiter.","reason":"General writing task."}
+{"id":"F10","should_trigger":false,"prompt":"Help me debug why this SQL query is slow by suggesting indexes only.","reason":"Narrow diagnostic request without broader workflow intent."}
+{"id":"F11","should_trigger":false,"prompt":"Write a short code review comment I can paste into GitHub for this PR.","reason":"Mentions code context but is writing-only, no implementation workflow."}
+{"id":"F12","should_trigger":false,"prompt":"Give me one Python function to parse CSV quickly; no tests or plan needed.","reason":"Explicitly requests a quick snippet without workflow gates."}
+{"id":"F13","should_trigger":false,"prompt":"I only need a fast fix suggestion for this stack trace, not a full process.","reason":"Adversarial phrasing rejects full workflow usage."}
+{"id":"F14","should_trigger":false,"prompt":"Summarize what changed in this commit and suggest a title.","reason":"Repository/code-adjacent but not a code-change delivery task."}
+{"id":"F15","should_trigger":false,"prompt":"List three possible root causes for flaky tests; do not implement anything.","reason":"Diagnostic brainstorming without implementation workflow intent."}

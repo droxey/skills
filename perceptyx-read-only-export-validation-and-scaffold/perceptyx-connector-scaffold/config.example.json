@@ -1,0 +1,32 @@
+{
+  "enabled": false,
+  "connector_mode": "read_only",
+  "tenant_name": "REQUIRED_TENANT_NAME",
+  "tenant_region": "REQUIRED_TENANT_REGION",
+  "tenant_base_url": "REQUIRED_APPROVED_BASE_URL",
+  "oauth": {
+    "client_id": "REQUIRED_IF_APPROVED",
+    "client_secret_env": "REQUIRED_IF_APPROVED",
+    "token_url": "REQUIRED_IF_APPROVED",
+    "scopes": [
+      "REQUIRED_APPROVED_SCOPE"
+    ]
+  },
+  "approvals": {
+    "api_access_approved": false,
+    "data_release_approved": false,
+    "approved_datasets": [],
+    "approval_notes": "DOCUMENT_APPROVAL_SOURCE_HERE"
+  },
+  "export_fallback": {
+    "mode": "approved_file_export",
+    "format": "csv_or_other_approved_export",
+    "delivery": "customer_approved_delivery_method",
+    "notes": "USE_WHEN_API_ACCESS_OR_APPROVAL_IS_MISSING"
+  },
+  "read_only_operations": {
+    "list_exports": false,
+    "fetch_export": false,
+    "normalize_records": true
+  }
+}

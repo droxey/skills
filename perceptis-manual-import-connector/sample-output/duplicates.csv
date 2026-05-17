@@ -1,0 +1,3 @@
+client_id,client_name,service_date,service_type,status,hours,worker,location,notes
+1001,Alex Smith,2026-04-01,Case Management,Completed,1.5,Jordan Lee,Clinic A,Initial intake completed
+1001,Alex Smith,2026-04-01,Case Management,Completed,1.5,Jordan Lee,Clinic A,Initial intake completed duplicate

@@ -1,0 +1,16 @@
+{
+  "status": "ok",
+  "input_file": "examples/sample_perceptis_report.csv",
+  "archived_input": "archive/sample_perceptis_report.csv",
+  "row_count": 4,
+  "preview_row_count": 4,
+  "duplicate_row_count": 2,
+  "exception_count": 0,
+  "artifacts": {
+    "normalized": "output/normalized.csv",
+    "preview": "output/preview.csv",
+    "duplicates": "output/duplicates.csv",
+    "exceptions": "output/exceptions.csv",
+    "summary": "output/summary.json"
+  }
+}
