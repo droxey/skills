@@ -1,7 +1,7 @@
 # Product Reverse Engineering Router Design
 
-**Date:** 2026-07-19  
-**Status:** Approved  
+**Date:** 2026-07-19
+**Status:** Approved
 **Repository:** `droxey/skills`
 
 ## Context
