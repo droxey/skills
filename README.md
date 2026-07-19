@@ -47,3 +47,12 @@ Sample prompt:
 ```text
 Use the code skill to execute a refactor with plan iteration, spec-first thinking, tests-first implementation, manual verification, review, mutation testing, and docs updates.
 ```
+
+## reasoning-router
+
+Source: `reasoning-router/`
+
+Sample prompt:
+```text
+Use the reasoning-router skill before beginning the task to select the lowest sufficient available reasoning mode.
+```
