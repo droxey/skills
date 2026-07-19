@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Reverse Engineering"
+  short_description: "Route product analysis and rebuilding work"
+  default_prompt: "Route this product reverse-engineering request to the right specialist."

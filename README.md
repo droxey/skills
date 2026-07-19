@@ -56,3 +56,12 @@ Sample prompt:
 ```text
 Use the reasoning-router skill before beginning the task to select the lowest sufficient available reasoning mode.
 ```
+
+## product-reverse-engineering
+
+Source: `product-reverse-engineering/`
+
+Sample prompt:
+```text
+Use the product-reverse-engineering skill to route this product analysis or rebuilding request to the correct specialist and preserve reviewed evidence between phases.
+```
