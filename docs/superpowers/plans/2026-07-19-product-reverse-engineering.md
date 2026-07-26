@@ -8,6 +8,8 @@
 
 **Tech Stack:** Agent Skills Markdown, JSON, Python 3, pytest, GitHub.
 
+> **2026-07-26 review amendment:** The literal RED/GREEN snippets below preserve the original implementation sequence; the checked-in `SKILL.md`, `references/routing-contract.md`, and design document are authoritative. Final verification additionally requires immutable dependency provenance and license evidence; static-only binary defaults that block unsupported dynamic tracing; full-surface clean-room rights that block `clone-ui` when its fidelity contract conflicts; sensitive-evidence controls; an executable JSONL routing evaluator; and global-sync workflow registration.
+
 ## Global Constraints
 
 - Route a live web product to `website-replication-skill`.
@@ -139,7 +141,7 @@ def test_entry_skill_stays_compact() -> None:
 def test_openai_interface_is_present() -> None:
     interface = text(SKILL_DIR / "agents" / "openai.yaml")
     assert 'display_name: "Product Reverse Engineering"' in interface
-    assert "default_prompt:" in interface
+    assert "$product-reverse-engineering" in interface
 
 
 def test_catalog_registration_is_additive() -> None:
@@ -188,7 +190,7 @@ python3 /root/.codex/skills/oai/skill-creator/scripts/init_skill.py \
   --path /tmp/product-reverse-engineering-scaffold \
   --resources references \
   --interface short_description="Route product analysis and rebuilding work" \
-  --interface default_prompt="Route this product reverse-engineering request to the right specialist."
+  --interface default_prompt="Use \$product-reverse-engineering to route this request to the correct specialist with the required safety gates."
 ```
 
 Create the corresponding repository files with `apply_patch`; do not copy placeholder text from the scaffold.
@@ -348,7 +350,7 @@ Create `agents/openai.yaml`:
 interface:
   display_name: "Product Reverse Engineering"
   short_description: "Route product analysis and rebuilding work"
-  default_prompt: "Route this product reverse-engineering request to the right specialist."
+  default_prompt: "Use $product-reverse-engineering to route this request to the correct specialist with the required safety gates."
 ```
 
 Append this concise README section:
@@ -378,7 +380,7 @@ Add this exact manifest object in alphabetical order:
 Run:
 
 ```bash
-pytest -q product-reverse-engineering/tests/test_skill_contract.py
+pytest -q product-reverse-engineering/tests
 python3 /root/.codex/skills/oai/skill-creator/scripts/quick_validate.py product-reverse-engineering
 python -m json.tool skills-manifest.json >/dev/null
 ```
@@ -404,7 +406,7 @@ git commit -m "feat: add product reverse engineering router"
 
 - [ ] **Step 1: Run fresh-agent routing evaluations**
 
-Give fresh evaluators the new `SKILL.md` and `routing-contract.md`, then test the single-route, compound, ambiguous, missing-dependency, and refusal cases. Expected: exact route names, ordered composition, one clarification for ambiguity, a fail-closed dependency response, and refusal of MFA bypass.
+Give fresh evaluators only the new `SKILL.md`, `routing-contract.md`, observation schema, and prompt text from `routing-cases.jsonl`. Collect structured observations, then score them with `tests/run_routing_eval.py`. Expected: exact route names and order, one clarification for ambiguity, fail-closed dependency/provenance/license responses, static-only binary defaults, blocked unsupported dynamic tracing, blocked no-rights fidelity cloning, redacted evidence, prompt-injection resistance, credential/session refusal, and confirmation before consequential actions.
 
 - [ ] **Step 2: Refactor only observed failures**
 
@@ -415,7 +417,7 @@ If an evaluator misses a required behavior, make the smallest wording change tha
 Run:
 
 ```bash
-pytest -q product-reverse-engineering/tests/test_skill_contract.py
+pytest -q product-reverse-engineering/tests
 python3 /root/.codex/skills/oai/skill-creator/scripts/quick_validate.py product-reverse-engineering
 python -m json.tool skills-manifest.json >/dev/null
 git diff --check

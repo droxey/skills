@@ -63,5 +63,5 @@ Source: `product-reverse-engineering/`
 
 Sample prompt:
 ```text
-Use the product-reverse-engineering skill to route this product analysis or rebuilding request to the correct specialist and preserve reviewed evidence between phases.
+Use $product-reverse-engineering to route this product analysis or rebuilding request to the correct specialist with the required safety gates and reviewed handoffs.
 ```

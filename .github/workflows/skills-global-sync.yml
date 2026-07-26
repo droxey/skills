@@ -26,13 +26,11 @@ on:
       - 'perceptis-manual-import-connector/**'
       - 'perceptyx-read-only-export-validation-and-scaffold/**'
       - 'product-clone-research/**'
+      - 'product-reverse-engineering/**'
       - 'prompt-technique-router/**'
       - 'repo-settings-bootstrap/**'
       - 'resume-ats-pdf-optimizer/**'
   workflow_dispatch:
-
-permissions:
-  contents: read
 
 jobs:
   sync-smoke:
