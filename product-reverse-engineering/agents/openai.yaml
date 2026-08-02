@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Reverse Engineering"
+  short_description: "Route product analysis and rebuilding work"
+  default_prompt: "Use $product-reverse-engineering to route this request to the correct specialist with the required safety gates."
