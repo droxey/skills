@@ -1,6 +1,7 @@
 ---
 name: dani-roxberrys-teaching-voice
-description: Generate lesson assets in Dani Roxberry's builder-teacher voice from a lesson plan, plan, or topic outline without requiring a transcript at runtime.
+description: Use when generating lesson assets in Dani Roxberry's builder-teacher voice from a lesson plan, topic outline, or course materials without requiring a transcript at runtime.
+maturity: 0
 ---
 
 # Dani Roxberry's Teaching Voice
@@ -239,3 +240,11 @@ A successful run:
 - stays practical and direct
 - avoids academic and AI-polished drift
 - produces examples, slides, and notes that align with the lesson plan
+
+## Example
+
+Given a topic outline for "HTTP caching for frontend engineers", generate `examples.md` first (one concrete, engineering-grounded example per objective), then `slides.md` and `speaker-notes.md` in the precomputed builder-teacher voice, and finish with the privacy scrub and drift audit. Do not ask for a transcript unless the user requests a voice refresh.
+
+## Maturity
+
+Level 0 - Intent. The voice model, generation order, and validation passes are stable as prose but are not yet encoded as a runnable script or covered by tests. Next step toward determinism: move the drift-audit and privacy-scrub checks into a small validator with golden fixtures under `tests/`.
