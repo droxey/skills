@@ -4,7 +4,7 @@
 Deterministic; standard library only. Adds a computed `maturity` field to each
 SKILL.md's frontmatter and ensures the required body sections (Purpose, Inputs,
 Outputs, Example, Success criteria, Maturity) exist using curated content drawn
-from each skill's own description. Runs in place over the live install dirs.
+from each skill's own description. Runs in place over the repository root.
 """
 import argparse
 import re

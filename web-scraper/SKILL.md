@@ -317,10 +317,11 @@ async def extract_page_content(url: str) -> dict:
     if result and is_content_sufficient(result):
         return enrich_result(result, url)
 
-    # 2. Playwright (JS rendering)
-    result = await fetch_with_playwright(url)
-    if result and 'error' not in result:
-        return enrich_result(result, url)
+    # 2. Playwright (JS rendering), only when heuristics indicate JS is needed
+    if needs_js_rendering(result):
+        result = await fetch_with_playwright(url)
+        if result and 'error' not in result:
+            return enrich_result(result, url)
 
     return {'url': url, 'error': 'all_methods_failed', 'content': None}
 

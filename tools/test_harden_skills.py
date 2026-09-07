@@ -12,7 +12,9 @@ from tools import harden_skills as hs
 
 class HardenSkillTests(unittest.TestCase):
     def test_replaces_entire_multiline_description(self):
-        root = Path(tempfile.mkdtemp())
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        root = Path(temp_dir.name)
         skill = root / "humanize"
         skill.mkdir()
         (skill / "SKILL.md").write_text(
