@@ -1,6 +1,7 @@
 ---
 name: product-reverse-engineering
 description: Use when a user wants to reverse engineer, analyze, specify, or rebuild a digital product and the work must be routed by evidence source or outcome across a live web product, authorized repository or binary, business mechanics, UI recreation, or source-to-PRD.
+maturity: 3
 ---
 
 # Product Reverse Engineering Router
@@ -67,3 +68,11 @@ If “reverse engineer this product” does not reveal the evidence or outcome, 
 ## Example
 
 “Audit this live app, then rebuild it in my React project” becomes two gated phases: run `website-replication-skill`, review its behavior and requirements artifacts, then hand those reviewed artifacts to `clone-ui`.
+
+## Success criteria
+
+A successful route names exactly one verified destination per atomic phase, fails closed on anything missing or unverified, never bypasses an access boundary or guardrail, and passes the router's unit tests and the routing eval over the golden cases.
+
+## Maturity
+
+Level 3 - Safety and Scale. Routing is pinned by `references/routing-contract.md`; machine-readable golden cases and unit tests live under `tests/`; the typed destination interface lives under `agents/`. Guardrails require human approval before consequential actions, and the router runs read-only with least privilege by default.
