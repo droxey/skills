@@ -1,6 +1,6 @@
 ---
 name: resume-ats-pdf-optimizer
-description: Score and improve a resume PDF against a job description using ATS gap analysis and minimal, layout-preserving edits. Use this skill whenever the user asks to tailor a resume, score ATS compatibility, find missing JD keywords, or update a resume PDF without changing formatting or typography.
+description: Use when scoring and improving a resume PDF against a job description.
 maturity: 0
 ---
 
@@ -148,4 +148,3 @@ Score a resume, list missing keywords, and apply the smallest edits that raise t
 ## Success criteria
 
 Keyword gaps are addressed with edits that preserve the PDF's formatting.
-

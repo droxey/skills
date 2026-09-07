@@ -1,6 +1,6 @@
 ---
 name: teaching-lesson-plan
-description: "Design a structured lesson plan for any subject, audience, or format. Use when asked to write a lesson plan, course outline, teaching session, workshop curriculum, or training module. Produces a complete lesson plan with learning objectives, activities, timing, assessment, and differentiation guidance."
+description: Use when designing a structured lesson plan for any subject, audience, or format.
 maturity: 0
 ---
 
@@ -149,4 +149,3 @@ Build a workshop plan with learning objectives, timed activities, and a closing 
 ## Success criteria
 
 The plan includes objectives, activities, timing, and assessment for the stated audience.
-

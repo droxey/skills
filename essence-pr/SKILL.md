@@ -1,9 +1,6 @@
 ---
 name: essence-pr
-description: >
-  Write a PR/MR description that stands on its own: no conversation residue, no padding, only
-  what a reviewer who wasn't there needs. No fixed template; shape it the way you always would.
-  Use when user says "write a PR description", "PR description", or invokes /essence-pr.
+description: Use when writing a standalone pull-request description for reviewers without prior context.
 maturity: 0
 ---
 
@@ -36,3 +33,23 @@ existing PR, produce the replacement text; let the user apply it.
 ## Maturity
 
 Level 0 - Intent. Substantiated by the written contract only; the essence methodology is maintained in the droxey/skills repo.
+
+## Purpose
+
+Give reviewers the rationale and scope needed to evaluate a pull request.
+
+## Inputs
+
+The pull request diff, relevant constraints, and any repository template.
+
+## Outputs
+
+A reviewer-ready pull-request description.
+
+## Example
+
+Explain why a retry limit changed and how the included tests demonstrate the intended behavior.
+
+## Success criteria
+
+The description is self-contained, follows the repository template, and avoids padding.

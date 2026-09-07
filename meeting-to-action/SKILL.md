@@ -1,6 +1,6 @@
 ---
 name: meeting-to-action
-description: Convert meeting notes or transcripts into clear summaries, decisions,
+description: Use when converting meeting notes or transcripts into summaries, decisions, and action items.
   and action items with owners and due dates. Use when a user asks to turn a meeting
   recording, transcript, or notes into a follow-up plan.
 created_at: '2026-05-15T06:39:52.080801+00:00'
@@ -24,13 +24,9 @@ Transform meeting content into an actionable follow-up package with clear owners
 - Avoid when sensitive content should not be shared.
 
 ## Quick orientation
-- `references/overview.md` for workflow and quality bar.
-- `references/auth.md` for access and token handling.
-- `references/endpoints.md` for optional integrations and templates.
-- `references/webhooks.md` for async event handling.
-- `references/ux.md` for intake questions and output formats.
-- `references/troubleshooting.md` for common issues.
-- `references/safety.md` for safety and privacy guardrails.
+- Identify decisions, action items, owners, due dates, and unresolved questions.
+- Confirm ambiguous ownership or dates rather than presenting inferences as facts.
+- Produce drafts only; preserve confidentiality and do not access integrations.
 
 ## Required inputs
 - Transcript or notes.
@@ -83,4 +79,3 @@ From a transcript, extract decisions and produce action items each with an owner
 ## Success criteria
 
 Every decision and action is captured with an owner so nothing actionable is lost.
-

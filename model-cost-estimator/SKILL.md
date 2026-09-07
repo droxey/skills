@@ -1,6 +1,6 @@
 ---
 name: model-cost-estimator
-description: Estimates model usage cost from token assumptions and model pricing inputs. Use when a user asks for cost projections, scenario comparisons, or budget checks.
+description: Use when projecting model usage costs from tokens, model pricing, and scenario inputs.
 maturity: 0
 ---
 
@@ -29,4 +29,3 @@ Estimate monthly cost for a traffic estimate at a given model's per-token price 
 ## Success criteria
 
 Every estimate states its token, pricing, and rate assumptions explicitly.
-

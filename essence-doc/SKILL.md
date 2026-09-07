@@ -1,9 +1,6 @@
 ---
 name: essence-doc
-description: >
-  Rewrite a doc, comment block, or note file so it stands on its own: strip conversation
-  residue and inflated phrasing, keep only what the reader needs, preserve code/URLs/paths
-  exactly. Trigger: /essence-doc <filepath> or "rewrite this doc to essence".
+description: Use when rewriting a document to stand alone while preserving code, URLs, and paths.
 maturity: 0
 ---
 
@@ -16,7 +13,7 @@ maturity: 0
 ## Process
 
 1. Read the target file.
-2. Rewrite it applying both essence rules from `skills/essence/SKILL.md`:
+2. Rewrite it applying both essence rules from `../essence/SKILL.md`:
    - Cut everything that only makes sense to someone who saw the conversation that produced
      this doc: the reader of this file was never in that conversation.
    - Find what you actually mean in each paragraph and write only that. Collapse padded
@@ -44,3 +41,23 @@ target.
 ## Maturity
 
 Level 0 - Intent. Substantiated by the written contract only; the essence methodology is maintained in the droxey/skills repo.
+
+## Purpose
+
+Tighten documentation without changing its protected literal content.
+
+## Inputs
+
+A documentation file to rewrite.
+
+## Outputs
+
+A concise rewrite and a validated backup of the original.
+
+## Example
+
+Rewrite a project note, then validate that its original code fences, URLs, and paths remain verbatim.
+
+## Success criteria
+
+The revised document stands alone and the protected-span validator succeeds.

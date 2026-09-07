@@ -1,6 +1,6 @@
 ---
 name: tdd-workflows-tdd-cycle
-description: "Use when working with tdd workflows tdd cycle"
+description: Use when following the TDD cycle within TDD workflows.
 maturity: 0
 ---
 
@@ -239,4 +239,3 @@ Failing test, passing implementation, and a refactor.
 ## Example
 
 Write the failing test, make it pass minimally, then refactor while keeping tests green.
-

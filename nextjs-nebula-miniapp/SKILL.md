@@ -1,6 +1,6 @@
 ---
 name: nextjs-nebula-miniapp
-description: Next.js + Nebula Miniapps best practices. Read when building, reviewing, or optimizing Next.js apps in the Nebula sandbox. Covers Server Components architecture, streaming/caching, data fetching, design compliance (shadcn/ui, spacing, touch targets), proxy integration, and production checklist.
+description: Use when building, reviewing, or optimizing a Next.js miniapp in the Nebula sandbox.
 maturity: 0
 ---
 
@@ -526,4 +526,3 @@ Review a miniapp's component architecture, data fetching, and checklist before d
 ## Success criteria
 
 The app meets the design, performance, and production-checklist standards.
-

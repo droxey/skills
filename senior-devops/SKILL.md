@@ -1,6 +1,6 @@
 ---
 name: senior-devops
-description: Comprehensive DevOps skills for CI/CD, infrastructure automation, containerization,
+description: Use when handling CI/CD, infra automation, containerization, and cloud operations.
   and cloud platforms (AWS, GCP, Azure). Includes pipeline setup, infrastruc...
 created_at: '2026-05-15T16:43:15.966146+00:00'
 updated_at: '2026-05-15T16:43:15.966146+00:00'
@@ -15,17 +15,12 @@ Complete toolkit for senior devops with modern tools and best practices.
 
 ### Main Capabilities
 
-This skill provides three core capabilities through automated scripts:
+This skill provides three core capabilities through documented, reviewable workflows:
 
 ```bash
-# Script 1: Pipeline Generator — scaffolds CI/CD pipelines for GitHub Actions or CircleCI
-python scripts/pipeline_generator.py ./app --platform=github --stages=build,test,deploy
-
-# Script 2: Terraform Scaffolder — generates and validates IaC modules for AWS/GCP/Azure
-python scripts/terraform_scaffolder.py ./infra --provider=aws --module=ecs-service --verbose
-
-# Script 3: Deployment Manager — orchestrates container deployments with rollback support
-python scripts/deployment_manager.py deploy --env=production --image=app:1.2.3 --strategy=blue-green
+# Pipeline: add a reviewed GitHub Actions or CircleCI workflow with build, test, and deploy stages.
+# Terraform: create the provider module, then run init, validate, and plan before applying.
+# Deployment: use the target platform's rollout and rollback commands with health-check gates.
 ```
 
 ## Core Capabilities
@@ -85,9 +80,7 @@ jobs:
 ```
 
 **Usage:**
-```bash
-python scripts/pipeline_generator.py <project-path> --platform=github<circleci --stages=build,test,deploy
-```
+Define the workflow in the target repository and review its generated diff before enabling deployments.
 
 ### 2. Terraform Scaffolder
 
@@ -145,9 +138,7 @@ resource "aws_ecs_service" "app" {
 ```
 
 **Usage:**
-```bash
-python scripts/terraform_scaffolder.py <target-path> --provider=aws|gcp|azure --module=ecs-service|gke-deployment|aks-service [--verbose]
-```
+Create the module in the target infrastructure repository, then run `terraform init`, `terraform validate`, and `terraform plan`.
 
 ### 3. Deployment Manager
 
@@ -194,32 +185,13 @@ spec:
 ```
 
 **Usage:**
-```bash
-python scripts/deployment_manager.py deploy \
-  --env=staging|production \
-  --image=app:1.2.3 \
-  --strategy=blue-green|rolling \
-  --health-check-url=https://app.example.com/healthz
-
-python scripts/deployment_manager.py rollback --env=production --to-version=1.2.2
-python scripts/deployment_manager.py --analyze --env=production   # audit current state
-```
-
-## Resources
-
-- Pattern Reference: `references/cicd_pipeline_guide.md` — detailed CI/CD patterns, best practices, anti-patterns
-- Workflow Guide: `references/infrastructure_as_code.md` — IaC step-by-step processes, optimization, troubleshooting
-- Technical Guide: `references/deployment_strategies.md` — deployment strategy configs, security considerations, scalability
-- Tool Scripts: `scripts/` directory
+Use your platform's deployment tooling to deploy to staging, wait for health checks, then promote to production. Keep the previous revision available for immediate rollback.
 
 ## Development Workflow
 
 ### 1. Infrastructure Changes (Terraform)
 
 ```bash
-# Scaffold or update module
-python scripts/terraform_scaffolder.py ./infra --provider=aws --module=ecs-service --verbose
-
 # Validate and plan — review diff before applying
 terraform -chdir=infra init
 terraform -chdir=infra validate
@@ -236,19 +208,9 @@ aws ecs describe-services --cluster production --services app-service \
 ### 2. Application Deployment
 
 ```bash
-# Generate or update pipeline config
-python scripts/pipeline_generator.py . --platform=github --stages=build,test,security,deploy
-
 # Build and tag image
 docker build -t ghcr.io/org/app:$(git rev-parse --short HEAD) .
 docker push ghcr.io/org/app:$(git rev-parse --short HEAD)
-
-# Deploy with health-check gate
-python scripts/deployment_manager.py deploy \
-  --env=production \
-  --image=app:$(git rev-parse --short HEAD) \
-  --strategy=blue-green \
-  --health-check-url=https://app.example.com/healthz
 
 # Verify pods are running
 kubectl get pods -n production -l app=myapp
@@ -262,10 +224,7 @@ kubectl patch service app-svc -n production \
 ### 3. Rollback Procedure
 
 ```bash
-# Immediate rollback via deployment manager
-python scripts/deployment_manager.py rollback --env=production --to-version=1.2.2
-
-# Or via kubectl
+# Roll back via kubectl
 kubectl rollout undo deployment/app -n production
 kubectl rollout status deployment/app -n production
 
@@ -276,7 +235,8 @@ curl -sf https://app.example.com/healthz || echo "ROLLBACK FAILED — escalate"
 
 ## Troubleshooting
 
-Check the comprehensive troubleshooting section in `references/deployment_strategies.md`.
+Inspect deployment events, pod logs, health checks, and the most recent rollout
+revision before escalating.
 
 ## Maturity
 
@@ -301,4 +261,3 @@ Design and apply a containerized deployment pipeline with health checks for a se
 ## Success criteria
 
 The delivered change is production-safe, reproducible, and documented.
-

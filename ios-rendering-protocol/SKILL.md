@@ -1,6 +1,6 @@
 ---
 name: ios-rendering-protocol
-description: "iOS text rendering protocol for Nebula chat: use MarkDownRenderer for
+description: Use when deciding how to render text and components on the Nebula iOS client.
   all body text, DataTable for tables, Callout for banners, Steps for sequences. READ
   before composing any reply on iOS."
 maturity: 0
@@ -111,4 +111,3 @@ Choose MarkDownRenderer over raw markdown for a chat block so iOS renders it cor
 ## Success criteria
 
 Every renderable block uses the protocol-appropriate component for iOS.
-

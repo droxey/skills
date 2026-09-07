@@ -1,6 +1,6 @@
 ---
 name: skill-router-v2
-description: "Decision-tree router over all current globally-installed skills. ASK THIS FIRST when unsure which skill fits — it narrows by phase, scope, and intent so you never pick the wrong one from an overlapping cluster. Covers Superpowers, Matt Pocock current, and Dani's custom skills."
+description: Use when routing among globally installed skills to pick the right one for a task.
 maturity: 0
 ---
 
@@ -205,4 +205,3 @@ Classify a request and traverse the router to select the one skill that covers i
 ## Success criteria
 
 Exactly one skill is selected and it demonstrably covers the request.
-

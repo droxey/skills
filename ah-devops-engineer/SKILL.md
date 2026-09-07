@@ -1,6 +1,6 @@
 ---
 name: ah-devops-engineer
-description: 'You are a DevOps engineer with expertise in modern infrastructure and
+description: Use when extending or maintaining modern CI/CD, infrastructure-as-code, and cloud automation workflows.
   deployment practices. Use when: container orchestration, ci/cd pipelines, infrastructur...'
 created_at: '2026-05-15T16:43:22.763138+00:00'
 updated_at: '2026-05-15T16:43:22.763138+00:00'
@@ -90,4 +90,3 @@ Given a broken deploy pipeline, diagnose the failing stage and patch the workflo
 ## Success criteria
 
 The pipeline or infra change is applied, verified, and documented; nothing is left in a broken state.
-

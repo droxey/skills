@@ -1,6 +1,6 @@
 ---
 name: product-clone-research
-description: Run authenticated website reconnaissance with chrome-mcp for clone planning. Use when a user provides a domain and wants structured route/flow capture, high-resolution screenshots, workflow documentation, coverage validation, and a handoff prompt to begin clone planning from captured research artifacts.
+description: Use when capturing a product's routes, flows, and screenshots for clone planning.
 maturity: 0
 ---
 
@@ -159,4 +159,3 @@ Map a site's auth and core flows with screenshots, then summarize into a clone-p
 ## Success criteria
 
 The captured artifacts cover the stated scope and produce a usable handoff prompt.
-

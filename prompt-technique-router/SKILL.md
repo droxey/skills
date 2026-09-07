@@ -1,6 +1,6 @@
 ---
 name: prompt-technique-router
-description: Selects and applies the best-fit prompting technique for a task. Use when a user asks to improve prompt quality, reduce ambiguity, or choose a prompting strategy.
+description: Use when choosing and applying the best-fit prompting technique for a task.
 maturity: 0
 ---
 
@@ -90,4 +90,3 @@ Classify a task's ambiguity and apply the matching technique to the actual promp
 ## Success criteria
 
 A specific technique is chosen and applied, not left as generic advice.
-

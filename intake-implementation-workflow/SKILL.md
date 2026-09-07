@@ -1,6 +1,6 @@
 ---
 name: intake-implementation-workflow
-description: Implementation workflow for the Intake product. Use when Intake implementation work resumes or when a new engineer needs the canonical planning context in one place.
+description: Use when resuming Intake product implementation or onboarding a new engineer to its canonical plan.
 maturity: 0
 ---
 
@@ -50,4 +50,3 @@ Hand a new engineer the Intake planning context so implementation resumes withou
 ## Success criteria
 
 The engineer or run has the canonical context and the next implementation step.
-

@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 """Finalize: minimally harden the essence meta-skills, then validate all first-party skills."""
+import argparse
 import re
 import sys
 from pathlib import Path
 
-ESSENCE = [Path("/home/nebula/.agents/skills") / n / "SKILL.md" for n in
-           ("essence", "essence-commit", "essence-doc", "essence-pr")]
-
-LIVE_ROOTS = [Path("/home/nebula/skills"), Path("/home/nebula/.agents/skills"),
-              Path("/home/nebula/shared/skills")]
+DEFAULT_ROOT = Path(__file__).resolve().parent.parent
+ESSENCE_NAMES = ("essence", "essence-commit", "essence-doc", "essence-pr")
 
 ALIASES = {
     "Purpose": ("purpose", "core rule", "intent", "what it does"),
@@ -55,32 +53,42 @@ def full_validate(path):
     return name, maturity, missing
 
 
-def main():
-    for p in ESSENCE:
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "root",
+        nargs="?",
+        type=Path,
+        default=DEFAULT_ROOT,
+        help="repository root to scan (default: parent of tools/)",
+    )
+    args = parser.parse_args(argv)
+    essence = [args.root / name / "SKILL.md" for name in ESSENCE_NAMES]
+    for p in essence:
         if p.exists():
             minimal_harden(p)
             print("[essence] %s -> maturity added" % p.parent.name)
         else:
             print("[essence] MISSING %s" % p)
 
-    print("\n=== full validation (30 hardened) ===")
-    seen = {}
-    for root in LIVE_ROOTS:
-        if not root.is_dir():
-            continue
-        for d in sorted(p for p in root.iterdir() if p.is_dir() and (p / "SKILL.md").exists()):
-            seen.setdefault(d.name, d)
+    print("\n=== full validation ===")
+    seen = {
+        d.name: d
+        for d in sorted(args.root.iterdir())
+        if d.is_dir() and (d / "SKILL.md").exists()
+    }
+    if not seen:
+        print("no SKILL.md files found under %s" % args.root, file=sys.stderr)
+        return 1
     bad = 0
     for name in sorted(seen):
-        if name.startswith("essence"):
-            continue
         n, maturity, missing = full_validate(seen[name] / "SKILL.md")
         if maturity is None or missing:
             bad += 1
             print("[FAIL] %-32s maturity=%s missing=%s" % (n, maturity, missing or "none"))
         else:
             print("[ok]   %-32s level %d" % (n, maturity))
-    print("\n%d skills validated, %d with violations" % (len(seen) - 4, bad))
+    print("\n%d skills validated, %d with violations" % (len(seen), bad))
     return 0 if bad == 0 else 1
 
 

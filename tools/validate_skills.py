@@ -58,18 +58,46 @@ def parse_frontmatter(text):
         return {}, "missing closing `---`"
     block = text[3:end]
     fm = {}
-    for line in block.splitlines():
-        if ":" not in line:
+    lines = block.splitlines()
+    index = 0
+    while index < len(lines):
+        match = re.match(r"^([A-Za-z][\w-]*):\s*(.*)$", lines[index])
+        if not match:
+            index += 1
             continue
-        key, _, value = line.partition(":")
-        fm[key.strip()] = value.strip()
+        key, value = match.groups()
+        if value in {">", ">-", ">+", "|", "|-", "|+"}:
+            folded = []
+            index += 1
+            while index < len(lines) and (
+                not lines[index].strip() or lines[index][0].isspace()
+            ):
+                folded.append(lines[index].strip())
+                index += 1
+            fm[key] = " ".join(part for part in folded if part)
+            continue
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+            value = value[1:-1]
+        fm[key] = value.strip()
+        index += 1
     return fm, None
 
 
 def extract_headings(body):
     """Return the set of normalized H2 heading names in body."""
     found = set()
+    fence = None
     for line in body.splitlines():
+        marker = re.match(r"^\s*(`{3,}|~{3,})", line)
+        if marker:
+            token = marker.group(1)
+            if fence is None:
+                fence = token[0]
+            elif token[0] == fence:
+                fence = None
+            continue
+        if fence:
+            continue
         match = re.match(r"^#{2}\s+(.+?)\s*$", line)
         if match:
             found.add(match.group(1).strip().lower())

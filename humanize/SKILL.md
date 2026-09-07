@@ -1,6 +1,6 @@
 ---
 name: humanize
-description: Remove AI writing patterns from text. Use when editing, reviewing, or
+description: Use when removing recognizable AI writing patterns from text.
   rewriting text to sound more natural and human-written. Detects patterns like inflated
   symbolism, promotional language, em dash overuse, AI vocabulary, and sycophantic
   tone.
@@ -169,8 +169,6 @@ High-frequency words: Additionally, crucial, delve, emphasizing, enhance, foster
 
 Provide the rewritten text. Optionally summarize key changes made.
 
-For detailed examples, see [examples.md](examples.md).
-
 ## Maturity
 
 Level 0 - Intent. Substantiated by the written contract only; no runnable asset or tests yet.
@@ -194,4 +192,3 @@ Rewrite a generated paragraph to drop hedge phrases and formulaic transitions wh
 ## Success criteria
 
 The rewrite reads naturally and no longer matches AI-writing detection patterns.
-

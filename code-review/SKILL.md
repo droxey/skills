@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Systematic code review patterns covering security, performance, maintainability,
+description: Use when reviewing code for security, performance, maintainability, and correctness issues.
   correctness, and testing — with severity levels, structured feedback guidance, review
   process, and anti-patterns to avoid. Use when reviewing PRs, establishing review
   standards, or improving review quality.
@@ -250,4 +250,3 @@ Review a PR's diff and order findings by severity with a specific fix for each.
 ## Success criteria
 
 Every finding is actionable, referenced to code, and free of speculative claims.
-
