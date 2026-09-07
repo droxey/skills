@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code"
+  short_description: "Plan-spec-test-verify-review-mutate delivery flow."
+  default_prompt: "Use the code skill to run a coding task through discussion, planning, spec writing, tests-first implementation, manual verification, review, mutation testing, and documentation updates."

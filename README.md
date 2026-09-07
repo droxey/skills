@@ -65,3 +65,16 @@ Sample prompt:
 ```text
 Use $product-reverse-engineering to route this product analysis or rebuilding request to the correct specialist with the required safety gates and reviewed handoffs.
 ```
+
+## skill-maturity
+
+Every first-party skill declares a `maturity` level in its `SKILL.md` frontmatter and carries the required Purpose, Inputs, Outputs, Example, Success criteria, and Maturity sections. Levels: `0` Intent, `1` Determinism (script/structured asset), `2` Stability (unit tests), `3` Safety and Scale (agents/ interface or safety section). See `docs/skill-maturity-standard.md`.
+
+Validate and harden the library:
+
+```bash
+python3 tools/validate_skills.py          # strict check of a skill directory's frontmatter + sections
+python3 tools/harden_skills.py            # batch-add maturity + required sections to live first-party skills
+python3 tools/finalize_skills.py          # harden the essence meta-skills and sweep-validate all skills
+python3 -m unittest tools.test_validate_skills
+```
