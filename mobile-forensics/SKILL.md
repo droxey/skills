@@ -1,9 +1,6 @@
 ---
 name: mobile-forensics
 description: Use when carving mobile artifacts, databases, and plists from forensic images.
-  property list parsing, chat app extraction (Signal, WhatsApp, Telegram, iMessage,
-  Messenger), cached app data recovery, and forensic report generation. Read when
-  working with mobile backups, app exports, or forensic investigations.
 created_at: '2026-05-15T03:00:29.031557+00:00'
 updated_at: '2026-05-15T03:00:29.031557+00:00'
 maturity: 0

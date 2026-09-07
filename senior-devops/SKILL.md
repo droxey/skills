@@ -1,7 +1,6 @@
 ---
 name: senior-devops
 description: Use when handling CI/CD, infra automation, containerization, and cloud operations.
-  and cloud platforms (AWS, GCP, Azure). Includes pipeline setup, infrastruc...
 created_at: '2026-05-15T16:43:15.966146+00:00'
 updated_at: '2026-05-15T16:43:15.966146+00:00'
 maturity: 0

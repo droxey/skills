@@ -1,9 +1,6 @@
 ---
 name: code-review
 description: Use when reviewing code for security, performance, maintainability, and correctness issues.
-  correctness, and testing — with severity levels, structured feedback guidance, review
-  process, and anti-patterns to avoid. Use when reviewing PRs, establishing review
-  standards, or improving review quality.
 created_at: '2026-05-16T15:40:24.077758+00:00'
 updated_at: '2026-05-16T15:40:24.077758+00:00'
 maturity: 0

@@ -1,9 +1,6 @@
 ---
 name: humanize
 description: Use when removing recognizable AI writing patterns from text.
-  rewriting text to sound more natural and human-written. Detects patterns like inflated
-  symbolism, promotional language, em dash overuse, AI vocabulary, and sycophantic
-  tone.
 created_at: '2026-05-15T05:58:56.595474+00:00'
 updated_at: '2026-05-15T05:58:56.595474+00:00'
 maturity: 0

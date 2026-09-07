@@ -1,8 +1,6 @@
 ---
 name: ios-rendering-protocol
 description: Use when deciding how to render text and components on the Nebula iOS client.
-  all body text, DataTable for tables, Callout for banners, Steps for sequences. READ
-  before composing any reply on iOS."
 maturity: 0
 ---
 

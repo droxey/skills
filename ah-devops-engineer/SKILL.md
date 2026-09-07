@@ -1,7 +1,6 @@
 ---
 name: ah-devops-engineer
 description: Use when extending or maintaining modern CI/CD, infrastructure-as-code, and cloud automation workflows.
-  deployment practices. Use when: container orchestration, ci/cd pipelines, infrastructur...'
 created_at: '2026-05-15T16:43:22.763138+00:00'
 updated_at: '2026-05-15T16:43:22.763138+00:00'
 maturity: 0

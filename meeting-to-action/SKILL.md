@@ -1,8 +1,6 @@
 ---
 name: meeting-to-action
 description: Use when converting meeting notes or transcripts into summaries, decisions, and action items.
-  and action items with owners and due dates. Use when a user asks to turn a meeting
-  recording, transcript, or notes into a follow-up plan.
 created_at: '2026-05-15T06:39:52.080801+00:00'
 updated_at: '2026-05-15T06:39:52.080801+00:00'
 maturity: 0

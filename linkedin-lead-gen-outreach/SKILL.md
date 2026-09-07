@@ -1,7 +1,6 @@
 ---
 name: linkedin-lead-gen-outreach
 description: Use when researching LinkedIn prospects and running lightweight outreach.
-  qualified leads, applying simple prioritization, drafting concise personalized message...
 created_at: '2026-05-15T06:13:51.052755+00:00'
 updated_at: '2026-05-15T06:13:51.052755+00:00'
 maturity: 0

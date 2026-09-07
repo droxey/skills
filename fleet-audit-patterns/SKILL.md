@@ -1,8 +1,6 @@
 ---
 name: fleet-audit-patterns
 description: Use when auditing a fleet of agents for toolkit overlap, duplication, and coverage gaps.
-  on 2+ agents), orphan agents (no goals or disabled), superset/subset relationships
-  suggesting merges, and agents with minimal unique value.'
 created_at: '2026-05-15T02:59:37.055072+00:00'
 updated_at: '2026-05-15T02:59:37.055072+00:00'
 maturity: 0

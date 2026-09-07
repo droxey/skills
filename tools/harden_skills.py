@@ -337,7 +337,12 @@ def harden(skill_dir, name):
     # 1. normalized frontmatter metadata
     level = compute_level(skill_dir)
     if re.search(r"(?m)^description:", fm):
-        fm = re.sub(r"(?m)^description:.*$", "description: %s" % cur["desc"], fm, count=1)
+        fm = re.sub(
+            r"(?m)^description:.*(?:\n[ \t]+.*)*",
+            "description: %s" % cur["desc"],
+            fm,
+            count=1,
+        )
     else:
         fm = fm.replace("\n---", "\ndescription: %s\n---" % cur["desc"], 1)
     if re.search(r"(?m)^maturity:", fm):

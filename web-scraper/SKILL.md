@@ -1,8 +1,6 @@
 ---
 name: web-scraper
 description: Use when scraping and extracting content from web pages with a multi-strategy approach.
-  with cascade fallback, news detection, boilerplate removal, structured metadata,
-  and...
 created_at: '2026-05-15T02:16:11.549616+00:00'
 updated_at: '2026-05-15T02:16:11.549616+00:00'
 maturity: 0
