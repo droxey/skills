@@ -1,6 +1,6 @@
 ---
-name: Codespace Operator
-description: Select the lightest GitHub workspace mode, prefer Codespaces only when runtime is needed, and return a validated mobile/web execution plan.
+name: codespace-operator-v2
+description: Use when selecting the lightest GitHub workspace mode for a given job.
 allowed-tools: GitHub, github.dev, Codespaces, gh, browser, terminal, claude_remote_control
 maturity: 0
 ---
@@ -169,4 +169,3 @@ Pick a Codespace only when the task needs a runtime; otherwise use a lighter mod
 ## Success criteria
 
 The chosen mode is the lightest one that satisfies the task's actual requirements.
-

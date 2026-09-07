@@ -1,13 +1,6 @@
 ---
 name: essence
-description: >
-  Strip writing down to what the reader needs: only what you mean, not a word more. Default
-  for everything you write: chat replies, code comments, commit messages, PR/issue text, docs,
-  published copy. Cuts conversation-derived cruft (meta-commentary about the chat, sycophancy,
-  preamble, hedging) and inflated phrasing, while keeping every fact the reader needs and normal
-  grammar. Not compression of words: caveman does that. This is compression of content.
-  Use when user says "essence", "essence mode", "strip the fluff", "make this stand on its own",
-  or invokes /essence. Also apply automatically by default.
+description: Use when tightening reader-facing prose by removing conversation residue and padding.
 maturity: 0
 ---
 
@@ -93,3 +86,23 @@ tight enough.
 ## Maturity
 
 Level 0 - Intent. Substantiated by the written contract only; the essence methodology is maintained in the droxey/skills repo.
+
+## Purpose
+
+Make reader-facing prose stand on its own without losing necessary facts or caveats.
+
+## Inputs
+
+Text to write or revise for a reader.
+
+## Outputs
+
+Concise prose that preserves required facts, code, paths, URLs, and uncertainty.
+
+## Example
+
+Revise a status update by removing chat references while retaining the decision, rationale, and next step.
+
+## Success criteria
+
+The reader can understand and act on the text without prior conversation context.

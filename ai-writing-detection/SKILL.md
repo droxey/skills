@@ -1,6 +1,6 @@
 ---
 name: ai-writing-detection
-description: Comprehensive AI writing detection patterns and methodology. Provides vocabulary lists, structural patterns, model-specific fingerprints, and false positive prevention guidance. Use when analyzing text for AI authorship or understanding detection patterns.
+description: Use when analyzing text for AI authorship or understanding detection patterns.
 allowed-tools: Read, Grep, Glob, WebFetch, WebSearch
 maturity: 0
 ---
@@ -259,4 +259,3 @@ Analyze an essay and identify which AI-writing patterns, if any, it exhibits.
 ## Success criteria
 
 Findings cite concrete patterns and avoid over-claiming where evidence is weak.
-

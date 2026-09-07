@@ -8,6 +8,10 @@
       "path": "ah-devops-engineer"
     },
     {
+      "name": "ai-writing-detection",
+      "path": "ai-writing-detection"
+    },
+    {
       "name": "chrome-mcp-web-fallback",
       "path": "chrome-mcp-web-fallback"
     },
@@ -32,8 +36,28 @@
       "path": "dani-roxberrys-teaching-voice"
     },
     {
+      "name": "essence",
+      "path": "essence"
+    },
+    {
+      "name": "essence-commit",
+      "path": "essence-commit"
+    },
+    {
+      "name": "essence-doc",
+      "path": "essence-doc"
+    },
+    {
+      "name": "essence-pr",
+      "path": "essence-pr"
+    },
+    {
       "name": "fleet-audit-patterns",
       "path": "fleet-audit-patterns"
+    },
+    {
+      "name": "go-defensive",
+      "path": "go-defensive"
     },
     {
       "name": "humanize",
@@ -42,6 +66,14 @@
     {
       "name": "intake-implementation-workflow",
       "path": "intake-implementation-workflow"
+    },
+    {
+      "name": "improve",
+      "path": "improve"
+    },
+    {
+      "name": "ios-rendering-protocol",
+      "path": "ios-rendering-protocol"
     },
     {
       "name": "linkedin-lead-gen-outreach",
@@ -72,6 +104,10 @@
       "path": "nextjs-nebula-miniapp"
     },
     {
+      "name": "owasp-top-10",
+      "path": "owasp-top-10"
+    },
+    {
       "name": "perceptis-manual-import-connector",
       "path": "perceptis-manual-import-connector"
     },
@@ -92,6 +128,10 @@
       "path": "prompt-technique-router"
     },
     {
+      "name": "qmd",
+      "path": "qmd"
+    },
+    {
       "name": "repo-settings-bootstrap",
       "path": "repo-settings-bootstrap"
     },
@@ -102,6 +142,18 @@
     {
       "name": "senior-devops",
       "path": "senior-devops"
+    },
+    {
+      "name": "skill-router-v2",
+      "path": "skill-router-v2"
+    },
+    {
+      "name": "tdd-workflows-tdd-cycle",
+      "path": "tdd-workflows-tdd-cycle"
+    },
+    {
+      "name": "teaching-lesson-plan",
+      "path": "teaching-lesson-plan"
     },
     {
       "name": "web-scraper",

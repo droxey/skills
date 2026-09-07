@@ -1,6 +1,6 @@
 ---
 name: owasp-top-10
-description: OWASP Top 10 security vulnerabilities with detection and remediation patterns. Use when conducting security audits, implementing secure coding practices, or reviewing code for common security vulnerabilities.
+description: Use when auditing for OWASP Top 10 vulnerabilities or reviewing secure code.
 keywords:
   - CSRF
   - OWASP
@@ -150,4 +150,3 @@ Audit an app for injection and broken access control and map each finding to its
 ## Success criteria
 
 Every finding is mapped to an OWASP category with a remediation path.
-

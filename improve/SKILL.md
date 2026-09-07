@@ -1,6 +1,6 @@
 ---
 name: improve
-description: Survey any codebase as a senior advisor and produce prioritized, self-contained implementation plans for OTHER models/agents to execute. Strictly read-only on source code — never implements, fixes, or refactors anything itself.
+description: Use when surveying a codebase for senior-level, prioritized implementation plans.
 maturity: 0
 ---
 
@@ -73,4 +73,3 @@ Survey a repo and emit ranked implementation plans, each with enough detail to e
 ## Success criteria
 
 Each plan is self-contained, prioritized, and ready for another executor to run.
-

@@ -1,9 +1,6 @@
 ---
 name: mobile-forensics
-description: Mobile forensics techniques for SQLite database carving, plist/binary
-  property list parsing, chat app extraction (Signal, WhatsApp, Telegram, iMessage,
-  Messenger), cached app data recovery, and forensic report generation. Read when
-  working with mobile backups, app exports, or forensic investigations.
+description: Use when carving mobile artifacts, databases, and plists from forensic images.
 created_at: '2026-05-15T03:00:29.031557+00:00'
 updated_at: '2026-05-15T03:00:29.031557+00:00'
 maturity: 0
@@ -16,7 +13,7 @@ maturity: 0
 ### Write-Ahead Log (WAL) Recovery
 - SQLite WAL files (`-wal`, `-shm`) contain uncommitted and recent transactions
 - Use `sqlite3 db.sqlite ".recover" > recovered.sql` for corrupted databases
-- Python approach with `sqlite3.connect()` and `PRAGMA wal_checkpoint(TRUNCATE)` before extraction
+- Work only from verified copies of the database, `-wal`, and `-shm` files; never checkpoint or otherwise open the original evidence read-write
 - Deleted records survive in freelist pages — `PRAGMA freelist_count` to gauge recoverable data
 - Carving strategy: scan raw backup/images for SQLite magic bytes `0x53514C69746520666F726D6174203300`
 
@@ -152,4 +149,3 @@ Recover and reconstruct records from a device database and report what they show
 ## Success criteria
 
 Artifacts are extracted with intact provenance and interpreted without overstating findings.
-

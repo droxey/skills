@@ -12,7 +12,7 @@ import sys
 
 FENCE = re.compile(r"```.*?```", re.DOTALL)
 INLINE_CODE = re.compile(r"`[^`\n]+`")
-URL = re.compile(r"https?://[^\s)\]\"'>]+")
+URL = re.compile(r"https?://[^\s\]\"'>]+")
 # path-like token: at least one slash, word/dot/dash chars, no whitespace either side
 PATH = re.compile(r"(?<![\w/])(?:\.{1,2}/|~/)?(?:[\w.-]+/)+[\w.-]+")
 
@@ -21,7 +21,7 @@ PATH = re.compile(r"(?<![\w/])(?:\.{1,2}/|~/)?(?:[\w.-]+/)+[\w.-]+")
 PATTERNS = [FENCE, INLINE_CODE, URL, PATH]
 
 
-TRAILING_PUNCT = ".,;:!?)"
+TRAILING_PUNCT = ".,;:!?"
 
 
 def extract_protected(text):
@@ -35,6 +35,9 @@ def extract_protected(text):
         # Trailing sentence punctuation (the period ending a sentence a URL sits in,
         # etc.) isn't part of the URL/path itself -- don't force the rewrite to keep it.
         trimmed = raw.rstrip(TRAILING_PUNCT) or raw
+        if raw.startswith(("http://", "https://")):
+            while trimmed.endswith(")") and trimmed.count(")") > trimmed.count("("):
+                trimmed = trimmed[:-1]
         spans.append(trimmed)
         return " " * len(raw)
 

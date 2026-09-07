@@ -22,6 +22,24 @@ class ParseFrontmatterTests(unittest.TestCase):
         _, err = vs.parse_frontmatter("---\nname: x\n")
         self.assertIsNotNone(err)
 
+    def test_quoted_description(self):
+        frontmatter, err = vs.parse_frontmatter(
+            '---\nname: x\ndescription: "Use when doing x."\nmaturity: 0\n---\n'
+        )
+        self.assertIsNone(err)
+        self.assertEqual(frontmatter["description"], "Use when doing x.")
+
+    def test_folded_description(self):
+        frontmatter, err = vs.parse_frontmatter(
+            "---\nname: x\ndescription: >\n  Use when doing x\n  over multiple lines.\nmaturity: 0\n---\n"
+        )
+        self.assertIsNone(err)
+        self.assertEqual(frontmatter["description"], "Use when doing x over multiple lines.")
+
+    def test_headings_in_fences_are_ignored(self):
+        headings = vs.extract_headings("```\n## Purpose\n```\n\n## Inputs\n")
+        self.assertEqual(headings, {"inputs"})
+
 
 class CheckSkillTests(unittest.TestCase):
     BASE = ["name: demo-skill", "description: Use when demonstrating.", "maturity: 0"]

@@ -1,6 +1,6 @@
 ---
 name: dani-roxberrys-teaching-voice
-description: Use when generating lesson assets in Dani Roxberry's builder-teacher voice from a lesson plan, topic outline, or course materials without requiring a transcript at runtime.
+description: Use when generating lesson assets in Dani Roxberry's builder-teacher voice from a plan or outline.
 maturity: 0
 ---
 

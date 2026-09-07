@@ -1,6 +1,6 @@
 ---
 name: qmd
-description: Bootstrap QMD search instructions from the installed qmd CLI. Use when users ask to find notes, retrieve documents, inspect a wiki, or answer from indexed local markdown.
+description: Use when bootstrapping QMD search instructions to query indexed local markdown.
 license: MIT
 compatibility: Requires qmd CLI. Run `qmd skill show` for version-matched instructions.
 allowed-tools: Bash(qmd:*), mcp__qmd__*
@@ -48,4 +48,3 @@ Convert a question into QMD search instructions and return matching indexed note
 ## Success criteria
 
 The query is translated into a working QMD search and results are grounded in the index.
-

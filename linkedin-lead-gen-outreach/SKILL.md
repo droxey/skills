@@ -1,7 +1,6 @@
 ---
 name: linkedin-lead-gen-outreach
-description: Lightweight LinkedIn prospecting and outreach workflow for researching
-  qualified leads, applying simple prioritization, drafting concise personalized message...
+description: Use when researching LinkedIn prospects and running lightweight outreach.
 created_at: '2026-05-15T06:13:51.052755+00:00'
 updated_at: '2026-05-15T06:13:51.052755+00:00'
 maturity: 0
@@ -110,7 +109,7 @@ Rules:
 
 ## 5. Use message templates
 
-Adapt one of the templates in `references/templates.md`.
+Use the ICP, scoring, and message format defined in this skill.
 
 Prefer:
 
@@ -219,12 +218,8 @@ This edition focuses on lightweight prospect research, simple prioritization, co
 
 ## Resources
 
-Use bundled resources when useful:
-
-- `references/templates.md` for ICP, scoring, and message templates
-- `scripts/csv_builder.py` to convert JSON leads into CSV
-- `scripts/sheets_prep.py` to normalize CSV fields for Google Sheets workflows
-- `scripts/dashboard_stats.py` to compute simple campaign metrics from a CSV file
+This skill is self-contained. Export the lead table as CSV, normalize fields in
+your spreadsheet, and calculate campaign metrics from the exported rows.
 
 ## Maturity
 
@@ -249,4 +244,3 @@ Research a target account's decision-makers and draft an outreach sequence for t
 ## Success criteria
 
 Prospects are researched and the outreach is accurate, tailored, and within stated bounds.
-

@@ -1,7 +1,7 @@
 ---
 name: code
-description: "Structured workflow for writing or refactoring code with an AI agent: discuss, iterate on a plan, capture a spec, implement tests-first, manually verify behavior, review with another pass, run mutation testing, and update docs/artifacts. Use when building non-trivial code changes where quality gates and regression resistance matter."
-maturity: 3
+description: Use when writing or refactoring non-trivial code with quality gates and regression resistance.
+maturity: 1
 ---
 
 # Code
@@ -132,4 +132,3 @@ Implement a feature by first capturing a short spec, writing failing tests, then
 ## Success criteria
 
 Tests pass, the review gates are met, and the change resists mutation testing.
-

@@ -1,9 +1,6 @@
 ---
 name: essence-commit
-description: >
-  Write a commit message that stands on its own: Conventional Commits format, why over what,
-  zero conversation residue, no AI-attribution trailer. Use when user says "write a commit",
-  "commit message", "generate commit", or invokes /essence-commit.
+description: Use when writing a standalone Conventional Commit message without conversation residue.
 maturity: 0
 ---
 
@@ -57,3 +54,19 @@ never compress those into subject-only.
 ## Maturity
 
 Level 0 - Intent. Substantiated by the written contract only; the essence methodology is maintained in the droxey/skills repo.
+
+## Purpose
+
+Produce a commit message that explains the change's rationale to a future reader.
+
+## Inputs
+
+A diff and any non-obvious constraint or issue reference.
+
+## Outputs
+
+A paste-ready Conventional Commit message.
+
+## Success criteria
+
+The message is imperative, self-contained, and omits AI attribution and conversation references.

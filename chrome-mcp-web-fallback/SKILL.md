@@ -1,6 +1,6 @@
 ---
 name: chrome-mcp-web-fallback
-description: Recover failed web retrieval tasks by retrying once with chrome-mcp. Use when curl, web search, fetch/open, or other HTTP/web request steps fail due to blocking, dynamic rendering, bot protection, redirects, or transport errors and a browser-driven fallback is required.
+description: Use when a web retrieval task fails from blocking or bot protection and needs a browser-driven retry.
 compatibility: Requires chrome-mcp to be installed locally or provided by the runtime environment and callable from this session, plus outbound network access to the target URLs, including DNS resolution and HTTP/HTTPS connectivity.
 maturity: 0
 ---
@@ -62,4 +62,3 @@ A curl fetch returns a 403; retry the same page through chrome-mcp and return th
 ## Success criteria
 
 The page is retrieved via the browser, or the failure is reported without further silent retries.
-

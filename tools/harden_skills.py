@@ -4,17 +4,14 @@
 Deterministic; standard library only. Adds a computed `maturity` field to each
 SKILL.md's frontmatter and ensures the required body sections (Purpose, Inputs,
 Outputs, Example, Success criteria, Maturity) exist using curated content drawn
-from each skill's own description. Runs in place over the live install dirs.
+from each skill's own description. Runs in place over the repository root.
 """
+import argparse
 import re
 import sys
 from pathlib import Path
 
-ROOTS = [
-    Path("/home/nebula/skills"),
-    Path("/home/nebula/.agents/skills"),
-    Path("/home/nebula/shared/skills"),
-]
+DEFAULT_ROOT = Path(__file__).resolve().parent.parent
 
 # name -> dict(desc, purpose, inputs, outputs, example, success). desc is a
 # "Use when ..." single-line replacement for the frontmatter description.
@@ -296,7 +293,7 @@ def has_agents(d):
 
 
 def compute_level(d):
-    if has_agents(d):
+    if has_agents(d) and has_tests(d):
         return 3
     if has_tests(d):
         return 2
@@ -337,8 +334,17 @@ def harden(skill_dir, name):
     body = text[body_start:]
     h = headings(body)
 
-    # 1. maturity field (insert before the closing fence; leave description as-is)
+    # 1. normalized frontmatter metadata
     level = compute_level(skill_dir)
+    if re.search(r"(?m)^description:", fm):
+        fm = re.sub(
+            r"(?m)^description:.*(?:\n[ \t]+.*)*",
+            "description: %s" % cur["desc"],
+            fm,
+            count=1,
+        )
+    else:
+        fm = fm.replace("\n---", "\ndescription: %s\n---" % cur["desc"], 1)
     if re.search(r"(?m)^maturity:", fm):
         fm = re.sub(r"(?m)^maturity:.*$", "maturity: %d" % level, fm, count=1)
     else:
@@ -371,16 +377,27 @@ def harden(skill_dir, name):
     return (name, level, len(additions))
 
 
-def main():
-    seen = {}
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "root",
+        nargs="?",
+        type=Path,
+        default=DEFAULT_ROOT,
+        help="repository root to scan (default: parent of tools/)",
+    )
+    args = parser.parse_args(argv)
+
+    seen = {
+        d.name: d
+        for d in sorted(args.root.iterdir())
+        if d.is_dir() and (d / "SKILL.md").exists() and d.name in CURATED
+    }
+    if not seen:
+        print("no curated SKILL.md files found under %s" % args.root, file=sys.stderr)
+        return 1
+
     total = 0
-    for root in ROOTS:
-        if not root.is_dir():
-            continue
-        for d in sorted(p for p in root.iterdir() if p.is_dir() and (p / "SKILL.md").exists()):
-            name = d.name
-            if name in CURATED and name not in seen:
-                seen[name] = d
     for name, d in sorted(seen.items()):
         res = harden(d, name)
         if res is None:

@@ -1,8 +1,6 @@
 ---
 name: fleet-audit-patterns
-description: 'When running a fleet audit, check for: toolkit overlap (same toolkits
-  on 2+ agents), orphan agents (no goals or disabled), superset/subset relationships
-  suggesting merges, and agents with minimal unique value.'
+description: Use when auditing a fleet of agents for toolkit overlap, duplication, and coverage gaps.
 created_at: '2026-05-15T02:59:37.055072+00:00'
 updated_at: '2026-05-15T02:59:37.055072+00:00'
 maturity: 0
@@ -53,4 +51,3 @@ Compare all agents' toolkits and flag any pair with redundant coverage plus any 
 ## Success criteria
 
 Every overlap, gap, and redundant-toolkit case in the fleet is named with a recommendation.
-

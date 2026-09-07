@@ -1,8 +1,6 @@
 ---
 name: web-scraper
-description: Web scraping and content comprehension agent — multi-strategy extraction
-  with cascade fallback, news detection, boilerplate removal, structured metadata,
-  and...
+description: Use when scraping and extracting content from web pages with a multi-strategy approach.
 created_at: '2026-05-15T02:16:11.549616+00:00'
 updated_at: '2026-05-15T02:16:11.549616+00:00'
 maturity: 0
@@ -127,9 +125,13 @@ def has_news_schema(html: str) -> bool:
     for tag in soup.find_all('script', type='application/ld+json'):
         try:
             data = json.loads(tag.string or '{}')
-            items = data.get('@graph', [data])  # supports WordPress/Yoast @graph
+            documents = data if isinstance(data, list) else [data]
+            items = []
+            for document in documents:
+                if isinstance(document, dict):
+                    items.extend(document.get('@graph', [document]))
             for item in items:
-                if item.get('@type') in NEWS_SCHEMA_TYPES:
+                if isinstance(item, dict) and item.get('@type') in NEWS_SCHEMA_TYPES:
                     return True
         except json.JSONDecodeError:
             continue
@@ -270,11 +272,11 @@ async def fetch_with_playwright(url: str, timeout_ms: int = 30_000) -> Optional[
             await page.goto(url, wait_until='networkidle', timeout=timeout_ms)
             await page.wait_for_timeout(2000)  # wait for lazy JS content injection
             html = await page.content()
-            text = await page.evaluate(''() => {
+            text = await page.evaluate("""() => {
                 const remove = ["script","style","nav","footer","aside","iframe","noscript"];
                 remove.forEach(t => document.querySelectorAll(t).forEach(el => el.remove()));
                 return document.body?.innerText || "";
-            }''')
+            }""")
 
             return {
                 'html': html,
@@ -315,8 +317,8 @@ async def extract_page_content(url: str) -> dict:
     if result and is_content_sufficient(result):
         return enrich_result(result, url)
 
-    # 2. Playwright (JS rendering)
-    if not result or needs_js_rendering(result):
+    # 2. Playwright (JS rendering), only when heuristics indicate JS is needed
+    if needs_js_rendering(result):
         result = await fetch_with_playwright(url)
         if result and 'error' not in result:
             return enrich_result(result, url)
@@ -593,7 +595,7 @@ Use the LLM **only on clean text** (output of Stage 3). NEVER pass raw HTML — 
 ### 5.1 Single Article Extraction
 
 ```python
-import json, time, re
+import json, os, time, re
 import requests as req
 
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
@@ -895,4 +897,3 @@ Extract article text from a page, falling back from static HTML to rendered cont
 ## Success criteria
 
 The requested content is extracted and the strategy that worked is reported.
-

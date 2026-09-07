@@ -1,6 +1,6 @@
 ---
 name: markdown-mode-router
-description: Routes markdown work to teaching or general formatting mode. Use when a user asks to write, rewrite, or normalize markdown with minimal structural changes.
+description: Use when routing Markdown work to teaching versus general formatting mode.
 maturity: 0
 ---
 
@@ -84,4 +84,3 @@ Decide whether a document edit needs teaching mode or general formatting, then n
 ## Success criteria
 
 The edit lands in the correct mode with no unnecessary restructuring.
-

@@ -1,6 +1,6 @@
 ---
 name: repo-settings-bootstrap
-description: Bootstraps repository settings-as-code artifacts such as .github/settings.yml and related governance defaults. Use when a repo needs initial policy scaffolding with minimal safe changes.
+description: Use when bootstrapping repository settings-as-code with minimal safe changes.
 maturity: 0
 ---
 
@@ -478,4 +478,3 @@ A repository and the governance defaults to establish.
 ## Example
 
 Add a .github/settings.yml with branch protection defaults and no unrelated edits.
-
