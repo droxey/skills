@@ -82,7 +82,7 @@ python3 -m unittest tools.test_validate_skills
 ### Use this repository with any agent harness
 
 [![Last updated](https://img.shields.io/github/last-commit/droxey/skills?label=last%20updated)](https://github.com/droxey/skills/commits/main)
-[![Skills](https://img.shields.io/badge/skills-34-blue)](#skills)
+[![Skills](https://img.shields.io/badge/skills-35-blue)](#skills)
 
 #### Kickoff prompt
 
