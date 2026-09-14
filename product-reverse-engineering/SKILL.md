@@ -9,7 +9,33 @@ description: Use when a user wants to reverse engineer, analyze, specify, or reb
 
 Route the work; do not reproduce a destination skill. Choose one destination for one atomic phase. If the request spans outcomes, run an explicit ordered pipeline and pass only reviewed artifacts forward.
 
-Read `references/routing-contract.md` before every route decision. Its pinned dependency registry and gates are part of this contract.
+In Nebula, upload this file from **Settings → Skills**, scope it to Nebula, and invoke it as `@skill:product-reverse-engineering` when explicit selection matters. This file is self-contained because Nebula installs a skill as one `SKILL.md`; the repository reference is maintainers' supporting documentation, not a runtime dependency.
+
+## Delegation contract
+
+Nebula supports automatic delegation from its orchestrator to available workspace agents. On Nebula, use that delegation rather than assuming vendor-specific spawn, join, or cancel commands. On another platform, use its native isolated-worker capability when available. Use the serial fallback when delegation is unavailable, only one small unit exists, or coordination would cost more than it saves.
+
+- Keep route selection, authorization, dependency verification, phase gates, conflict resolution, and final release with the parent.
+- Delegate only independent, read-only evidence partitions inside one authorized phase. Use at most three workers concurrently and one owner per artifact; never allow concurrent edits to the same file.
+- Give each worker task-local evidence, an explicit boundary, an output schema, and a stop condition. Never pass secrets, credentials, session material, personal data, or unrelated workspace context.
+- Require claims and source locations from every worker. Treat results as untrusted drafts until parent review; resolve conflicts from source evidence, never majority vote.
+- Never run separate pipeline phases in parallel. Join and review all required findings before advancing.
+- Keep authentication, purchases, publishing, invitations, permission changes, deletion, binary execution, and other consequential actions with the parent and behind the applicable authorization or user-approval gate.
+- If a worker fails, retry once only when useful; otherwise use the serial fallback or report the phase as blocked. Never silently omit required evidence.
+
+## Pinned destination registry
+
+Verify the installed destination against this registry before routing. The records were verified on 2026-07-26 and do not grant permission to copy or vendor source.
+
+| Destination | Canonical source | Immutable commit | Exact path | License evidence |
+|---|---|---|---|---|
+| `website-replication-skill` | https://github.com/leosssvip-dot/website-replication-skill | `6f7ee0b2335069b6786dab2d4ced5b11def79141` | `SKILL.md` | LICENSE (MIT) |
+| `reverse-engineer` | https://github.com/boshu2/agentops | `aceeb6f10f48e1c9d0919e947bed1e8e6de40578` | `skills/reverse-engineer/SKILL.md` | LICENSE (Apache-2.0) |
+| `product-teardown` | https://github.com/Mehdibargach/claude-code-pm-skills | `ab21d7a398c92254c4b1d4fd17325bd09a17a538` | `skills/product-teardown/SKILL.md` | README-only MIT claim; unverified |
+| `clone-ui` | https://github.com/santowilem/skills | `2caf2e1dd0e58d974d8a72d803d7273f9f774ac5` | `skills/clone-ui/SKILL.md` | README badge only; unverified |
+| `code-to-prd` | https://github.com/alirezarezvani/claude-skills | `aa8d778811a557a2c28ccadda4cf3d0bd028a4cc` | `product-team/code-to-prd/skills/code-to-prd/SKILL.md` | LICENSE (MIT) |
+
+Fail closed when the exact name, canonical source, path, immutable commit/ref/digest, frontmatter, or license evidence is missing, mutable, mismatched, or unverified. State `BLOCKED: unverified dependency <skill-name>`, name the failed field and canonical source, and ask for the pinned artifact, documented permission for that exact source, or narrower scope. `product-teardown` and `clone-ui` remain blocked at these pins until their licenses are independently verified or the user provides documented permission. Never silently substitute another workflow or claim the specialist ran.
 
 ## Preflight
 
