@@ -8,6 +8,19 @@ maturity: 0
 
 Use this skill when the user wants lesson materials, slides, speaker notes, examples, or companion quiz assets that sound like Dani Roxberry teaching in class.
 
+In Nebula, upload this file from **Settings → Skills**, scope it to Nebula or the teaching agent, and invoke it as `@skill:dani-roxberrys-teaching-voice` when explicit selection matters.
+
+## Delegation contract
+
+Nebula supports automatic delegation from its orchestrator to available workspace agents. On Nebula, use that delegation rather than assuming vendor-specific spawn, join, or cancel commands. On another platform, use its native isolated-worker capability when available. Use the serial fallback when delegation is unavailable, when only one small unit exists, or when coordination would cost more than it saves.
+
+- Delegate only independent, read-only units with explicit inputs, acceptance criteria, and output schemas.
+- Use at most three workers concurrently. Give one owner per artifact; never allow concurrent edits to the same file.
+- Pass only the frozen lesson brief and task-local sources. Never pass secrets, credentials, session material, identifying student data, or unrelated workspace context.
+- Keep the parent responsible for lesson authority, ordered synthesis, source verification, conflict resolution, final corrections, and release approval. Treat worker output as an untrusted draft until parent review.
+- Keep purchases, publishing, invitations, permission changes, deletion, and other consequential actions with the parent and require the user's explicit approval.
+- If a worker fails, retry once only when useful; otherwise complete that unit through the serial fallback or report the missing required artifact. Never omit it silently.
+
 ## Runtime model
 
 The teaching voice is precomputed.
@@ -81,7 +94,7 @@ Suppress:
 
 ## Generation order
 
-Always generate in this order:
+Always preserve `examples.md → slides.md → speaker-notes.md` in this order:
 1. examples.md
 2. slides.md
 3. speaker-notes.md
@@ -137,15 +150,16 @@ Must not:
 ## Standard workflow
 
 1. Read the lesson plan or topic outline first
-2. Normalize objectives, sequence, and constraints
+2. Normalize objectives, sequence, and constraints into a frozen lesson brief
 3. Apply the precomputed voice model
-4. Generate examples.md
-5. Generate slides.md
-6. Generate speaker-notes.md
-7. Run privacy scrub if source materials include identifying details
-8. Run drift audit against the lesson plan or topic outline
-9. Optionally generate a quiz spec for Ace Quiz Maker
-10. Finalize only after drift and privacy checks pass
+4. Optionally delegate independent example candidates by objective; have the parent review and merge them into examples.md
+5. Generate slides.md only after the parent accepts examples.md
+6. Generate speaker-notes.md only after the parent accepts slides.md
+7. After all required assets are stable, run privacy, drift, and voice audits in parallel when safe delegation is available; otherwise run them serially
+8. Require every audit finding to include severity, artifact, location, evidence, and proposed correction
+9. Have the parent resolve findings and apply corrections
+10. Optionally generate a quiz spec for Ace Quiz Maker
+11. Finalize only after drift and privacy checks pass
 
 ## Validation passes
 

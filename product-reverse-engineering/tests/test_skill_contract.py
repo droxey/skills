@@ -190,7 +190,8 @@ def test_authorization_and_access_controls_are_explicit() -> None:
 
 def test_high_risk_controls_are_always_loaded_by_the_router() -> None:
     skill = text(SKILL).lower()
-    assert "read `references/routing-contract.md` before every route decision" in skill
+    assert "this file is self-contained" in skill
+    assert "not a runtime dependency" in skill
     for phrase in (
         "static analysis is the default for binaries",
         "the pinned `reverse-engineer` destination is static-only",
@@ -209,7 +210,9 @@ def test_high_risk_controls_are_always_loaded_by_the_router() -> None:
 
 
 def test_entry_skill_stays_compact() -> None:
-    assert len(text(SKILL).split()) <= 800
+    # Nebula installs one SKILL.md, so its runtime gates and pinned registry must
+    # remain in the entry file instead of relying on bundled references.
+    assert len(text(SKILL).split()) <= 1_300
 
 
 def test_openai_interface_is_present() -> None:
