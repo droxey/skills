@@ -7,7 +7,7 @@ SKILL_DIR = ROOT / "product-reverse-engineering"
 SKILL = SKILL_DIR / "SKILL.md"
 REFERENCE = SKILL_DIR / "references" / "routing-contract.md"
 ROUTING_CASES = SKILL_DIR / "tests" / "routing-cases.jsonl"
-SYNC_WORKFLOW = ROOT / ".github" / "workflows" / "skills-global-sync.yml"
+VALIDATION_WORKFLOW = ROOT / ".github" / "workflows" / "skills-validation.yml"
 
 ROUTE_DESTINATIONS = {
     "Observe and specify a live web product": "`website-replication-skill`",
@@ -51,48 +51,6 @@ DESTINATION_PROVENANCE = {
         "product-team/code-to-prd/skills/code-to-prd/SKILL.md",
         "LICENSE (MIT)",
     ),
-}
-
-PREEXISTING_SKILL_NAMES = {
-    "ah-devops-engineer",
-    "chrome-mcp-web-fallback",
-    "code",
-    "code-review",
-    "codespace-operator",
-    "codespace-operator-v2",
-    "dani-roxberrys-teaching-voice",
-    "fleet-audit-patterns",
-    "humanize",
-    "intake-implementation-workflow",
-    "linkedin-lead-gen-outreach",
-    "markdown-mode-router",
-    "meeting-to-action",
-    "mobile-forensics",
-    "model-cost-estimator",
-    "musexmachine-mcp-codex-env",
-    "nextjs-nebula-miniapp",
-    "perceptis-manual-import-connector",
-    "perceptyx-read-only-export-validation-and-scaffold",
-    "product-clone-research",
-    "prompt-technique-router",
-    "repo-settings-bootstrap",
-    "resume-ats-pdf-optimizer",
-    "senior-devops",
-    "web-scraper",
-    "superpowers-brainstorming",
-    "superpowers-dispatching-parallel-agents",
-    "superpowers-executing-plans",
-    "superpowers-finishing-a-development-branch",
-    "superpowers-receiving-code-review",
-    "superpowers-requesting-code-review",
-    "superpowers-subagent-driven-development",
-    "superpowers-systematic-debugging",
-    "superpowers-test-driven-development",
-    "superpowers-using-git-worktrees",
-    "superpowers-using-superpowers",
-    "superpowers-verification-before-completion",
-    "superpowers-writing-plans",
-    "superpowers-writing-skills",
 }
 
 
@@ -221,10 +179,17 @@ def test_openai_interface_is_present() -> None:
     assert "$product-reverse-engineering" in interface
 
 
-def test_sync_workflow_registers_skill_and_has_one_permissions_key() -> None:
-    workflow = text(SYNC_WORKFLOW)
-    assert "- 'product-reverse-engineering/**'" in workflow
+def test_validation_workflow_checks_all_skills_without_syncing() -> None:
+    workflow = text(VALIDATION_WORKFLOW)
+    assert "  pull_request:" in workflow
+    assert "  push:" in workflow
+    assert not re.search(r"^\s+paths(?:-ignore)?:", workflow, flags=re.MULTILINE)
+    assert "python tools/validate_skills.py" in workflow
+    assert "python -m pytest -q" in workflow
+    assert "scripts/sync-skills.sh" not in workflow
+    assert not (ROOT / ".github/workflows/skills-global-sync.yml").exists()
     assert len(re.findall(r"^permissions:", workflow, flags=re.MULTILINE)) == 1
+    assert "  contents: read" in workflow
 
 
 def test_machine_readable_cases_cover_routes_and_safety_boundaries() -> None:
@@ -293,7 +258,7 @@ def test_machine_readable_cases_cover_routes_and_safety_boundaries() -> None:
     assert by_id["S7"]["expected_destinations"] == ["clone-ui"]
 
 
-def test_catalog_registration_is_additive() -> None:
+def test_catalog_registration_matches_available_skills() -> None:
     readme = text(ROOT / "README.md")
     manifest = json.loads(text(ROOT / "skills-manifest.json"))
     skills = manifest["skills"]
@@ -304,6 +269,9 @@ def test_catalog_registration_is_additive() -> None:
         "name": "product-reverse-engineering",
         "path": "product-reverse-engineering",
     } in skills
-    assert PREEXISTING_SKILL_NAMES <= set(names)
+    available = {path.parent.name for path in ROOT.glob("*/SKILL.md")}
+    assert set(names) == available
+    for entry in skills:
+        assert (ROOT / entry["path"] / "SKILL.md").is_file()
     assert names.count("product-reverse-engineering") == 1
     assert len(names) == len(set(names))

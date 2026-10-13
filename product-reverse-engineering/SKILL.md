@@ -10,7 +10,7 @@ maturity: 3
 
 Route the work; do not reproduce a destination skill. Choose one destination for one atomic phase. If the request spans outcomes, run an explicit ordered pipeline and pass only reviewed artifacts forward.
 
-In Nebula, upload this file from **Settings → Skills**, scope it to Nebula, and invoke it as `@skill:product-reverse-engineering` when explicit selection matters. This file is self-contained because Nebula installs a skill as one `SKILL.md`; the repository reference is maintainers' supporting documentation, not a runtime dependency.
+In Nebula, upload this file from **Settings → Skills**, scope it to Nebula, and invoke it as `@skill:product-reverse-engineering` when explicit selection matters. This file is self-contained: Nebula installs one `SKILL.md`. The repository reference supports maintainers; it is not a runtime dependency.
 
 ## Delegation contract
 

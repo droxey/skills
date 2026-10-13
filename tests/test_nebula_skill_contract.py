@@ -3,7 +3,11 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILLS = sorted(ROOT.glob("*/SKILL.md"))
+# Only these skills promise single-file Nebula use and portable delegation.
+SKILLS = [
+    ROOT / name / "SKILL.md"
+    for name in ("dani-roxberrys-teaching-voice", "product-reverse-engineering")
+]
 
 
 def body(path: Path) -> str:
@@ -20,7 +24,7 @@ def test_every_checked_out_skill_is_nebula_upload_compatible() -> None:
         skill = body(path)
         frontmatter = skill.split("---", 2)[1]
         keys = re.findall(r"^([a-z][a-z-]*):", frontmatter, flags=re.MULTILINE)
-        assert keys == ["name", "description"], path
+        assert keys == ["name", "description", "maturity"], path
         assert "Nebula" in skill, path
         assert "@skill:" in skill, path
 
