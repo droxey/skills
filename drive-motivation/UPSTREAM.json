@@ -1,0 +1,38 @@
+{
+  "commit": "c172996495bed0fcd26896a9416b2093fd7073f0",
+  "files": {
+    "SKILL.md": "b8fbc5824834058245073ca8c4b41368266af08e",
+    "references/applications.md": "0b5851d7a0b2b81cf9a3a0d0e3e007c87c94d854",
+    "references/autonomy.md": "28a0a17603036754070fac230d6d054d98dc050a",
+    "references/case-studies.md": "d6e1de1e7fecd6c346bd41e96523919181fd2643",
+    "references/extrinsic-rewards.md": "cd84d60a75a3fd9a9903bcda805b2e373cdc2a06",
+    "references/mastery.md": "4114b1c4f0bf6ab9508a5ba89db033e0bac5b850",
+    "references/purpose.md": "114b3b737e469cb54dcad007df22c52eae1324ff",
+    "references/type-i.md": "6ffe4a7e9481cc2893561977dd435c3d6941df1b"
+  },
+  "imported_by": "droxey/skills import of FindFlips selected skills",
+  "license": "MIT",
+  "local_changes": {
+    "SKILL.md": [
+      "Normalize line endings to LF.",
+      "Use a concise trigger description beginning with Use when.",
+      "Declare catalog maturity 0 and append Purpose, Inputs, Outputs, Example, Success criteria, and Maturity sections.",
+      "Preserve upstream framework body and all bundled references."
+    ]
+  },
+  "local_sha256": {
+    "SKILL.md": "ca9ff23c2ad651ee69cdd34474758c7e4cdf8a4aa666b978fdad9eca0c0f9271",
+    "UPSTREAM_LICENSE.txt": "87c3c90f9e673a76b8ca81049b8fe30996b910a7a80140c3ed57a2ee922d2579",
+    "references/applications.md": "99c5174c56effd819c70542f3772ae87f2d91ecf7fbdb3b75b2a63d648226d3f",
+    "references/autonomy.md": "c9ddfa7deb1150bc067c96d9fd682bc236182ffad05f0570adc6ba74d9305b14",
+    "references/case-studies.md": "5c710ba3cbbd9cd2c620400060e055447aa46be57e8ae10cbc1af00647a8dc40",
+    "references/extrinsic-rewards.md": "35215e5c87a00b7d1906f9ff9db24b7e4d66713fb1bdd27c2b59357e417df02d",
+    "references/mastery.md": "4ac0e6891d43e1ce0e8bc0797fee91c50c795b8ec318b47bad09b8b24eb72684",
+    "references/purpose.md": "618d32926cbc435ac7c47f33543e4795523bb9ec54e2242f0912f09ecae1dd49",
+    "references/type-i.md": "13b7c98620da85614f628a8719324ce130efda4fa3c09bbc2ec6e2bebab8566c"
+  },
+  "name": "drive-motivation",
+  "path": "drive-motivation",
+  "repo": "wondelai/skills",
+  "upstream_files_modified": true
+}

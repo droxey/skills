@@ -32,6 +32,10 @@
       "path": "dani-roxberrys-teaching-voice"
     },
     {
+      "name": "drive-motivation",
+      "path": "drive-motivation"
+    },
+    {
       "name": "essence",
       "path": "essence"
     },
@@ -52,20 +56,32 @@
       "path": "fleet-audit-patterns"
     },
     {
+      "name": "gamification",
+      "path": "gamification"
+    },
+    {
+      "name": "gamification-loops",
+      "path": "gamification-loops"
+    },
+    {
       "name": "go-defensive",
       "path": "go-defensive"
+    },
+    {
+      "name": "hooked-ux",
+      "path": "hooked-ux"
     },
     {
       "name": "humanize",
       "path": "humanize"
     },
     {
-      "name": "intake-implementation-workflow",
-      "path": "intake-implementation-workflow"
-    },
-    {
       "name": "improve",
       "path": "improve"
+    },
+    {
+      "name": "intake-implementation-workflow",
+      "path": "intake-implementation-workflow"
     },
     {
       "name": "ios-rendering-protocol",
@@ -82,6 +98,10 @@
     {
       "name": "meeting-to-action",
       "path": "meeting-to-action"
+    },
+    {
+      "name": "microinteractions",
+      "path": "microinteractions"
     },
     {
       "name": "mobile-forensics",

@@ -1,0 +1,38 @@
+{
+  "commit": "c172996495bed0fcd26896a9416b2093fd7073f0",
+  "files": {
+    "SKILL.md": "b7f318268cd380af12627bf7f790b17ac167929f",
+    "references/case-studies.md": "522f2705d91cb7abe76f24a8b9a7b3ad36997420",
+    "references/ethical-boundaries.md": "8f4a57c2e665396e8d4cfa1713bc5b445745c408",
+    "references/habit-testing.md": "b2bd5bc351834299c6d87e17c9b548d866fe519a",
+    "references/neuroscience-foundations.md": "7ca6e65a216946716b8953db26558ecf709358ac",
+    "references/product-applications.md": "0264879c96c8b3d09e7917b5a8b8b29f1cc1e37c",
+    "references/rewards.md": "7691507bd5f1cb00d4aa32aeefc96f59bf152069",
+    "references/triggers.md": "57d3342a844b5ed0796fbe95a1aa53ea6a432a6f"
+  },
+  "imported_by": "droxey/skills import of FindFlips selected skills",
+  "license": "MIT",
+  "local_changes": {
+    "SKILL.md": [
+      "Normalize line endings to LF.",
+      "Use a concise trigger description beginning with Use when.",
+      "Declare catalog maturity 0 and append Purpose, Inputs, Outputs, Example, Success criteria, and Maturity sections.",
+      "Preserve upstream framework body and all bundled references."
+    ]
+  },
+  "local_sha256": {
+    "SKILL.md": "30df1c999a03a34c2a0b6622d2fe3de286cc6298d32cb2320f26eb8bcd7a2ff9",
+    "UPSTREAM_LICENSE.txt": "87c3c90f9e673a76b8ca81049b8fe30996b910a7a80140c3ed57a2ee922d2579",
+    "references/case-studies.md": "d7810620335850ed17f6ea0757fb7db8af720a22e52cb7337f598e67bd5c39e3",
+    "references/ethical-boundaries.md": "58e0d33177f2d9dab690e37d9224e73e49c160b3cfa4f3f8ba2f2f51c958e757",
+    "references/habit-testing.md": "641ea5b7baec8922970ad6218c28d189d960a6a28df3ddbdbd0c3ba13bb055d4",
+    "references/neuroscience-foundations.md": "22fe8ea41194dc62391e3cfbfa3a656216791aa407205a99b2f440de33b219dd",
+    "references/product-applications.md": "65024600cf193b80ef138fadbb300f792b25eaabd53871c6632d31c815a93c9e",
+    "references/rewards.md": "e3386a3fce1c4fec390ce6109b51f9f914947f61f6b7514cfe96cd1076440a04",
+    "references/triggers.md": "354a0e893538217dbfca061e682aba2ce3d454c7accca615f56d6a0147685a05"
+  },
+  "name": "hooked-ux",
+  "path": "hooked-ux",
+  "repo": "wondelai/skills",
+  "upstream_files_modified": true
+}

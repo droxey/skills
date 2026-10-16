@@ -1,0 +1,36 @@
+{
+  "commit": "c172996495bed0fcd26896a9416b2093fd7073f0",
+  "files": {
+    "SKILL.md": "38ea3e5ae315d464bd8b21b6c27b5354a2ad6c16",
+    "references/case-studies.md": "d6c70b55f27b582e8ac7bd1b63115b647e8c6ba1",
+    "references/feedback-patterns.md": "a9c4c563b45e5539b10885ebc41b2f0e586b6f18",
+    "references/loops-modes.md": "5aae42b71f80c44252d5eaa85812d3a580034b94",
+    "references/rules-and-state.md": "8252a9fdc1409a08c441c9972b83aa48cfcba430",
+    "references/signature-moments.md": "cf657d6e36f8797a609a07629767ad6b2ba6587e",
+    "references/trigger-design.md": "cf0330de4de3b85cb142b5af2ca04c255f4d5abe"
+  },
+  "imported_by": "droxey/skills import of FindFlips selected skills",
+  "license": "MIT",
+  "local_changes": {
+    "SKILL.md": [
+      "Normalize line endings to LF.",
+      "Use a concise trigger description beginning with Use when.",
+      "Declare catalog maturity 0 and append Purpose, Inputs, Outputs, Example, Success criteria, and Maturity sections.",
+      "Preserve upstream framework body and all bundled references."
+    ]
+  },
+  "local_sha256": {
+    "SKILL.md": "9d8d7cb95269627eb5814a8be2bfb24e23f7bfee91afa68448942e81535240d4",
+    "UPSTREAM_LICENSE.txt": "87c3c90f9e673a76b8ca81049b8fe30996b910a7a80140c3ed57a2ee922d2579",
+    "references/case-studies.md": "abc31683a0b3b85d81b1fcd367caa436fe60905a909e0959c122e5ab195ed4bb",
+    "references/feedback-patterns.md": "6f0ddaf49d86c1578397c532d25c307613d67faf6438feaa88224fe694671528",
+    "references/loops-modes.md": "e261e8b3bc9c98c3e9e3dc882b74d26f80fa1d8d0d077af7e8692b0a4efa16d6",
+    "references/rules-and-state.md": "d21c5035aceb947be2db3014450875d73ecf1bf8c9bee0f94b397f9ef9f1bea7",
+    "references/signature-moments.md": "f82b690d980c40289280698602a18a3ba202376b3150f2697b85ff7001197f44",
+    "references/trigger-design.md": "06d1ae166b0983533b1180dd00643df91ac3b6ca36f86df9e1ded5c83aa2aaa2"
+  },
+  "name": "microinteractions",
+  "path": "microinteractions",
+  "repo": "wondelai/skills",
+  "upstream_files_modified": true
+}

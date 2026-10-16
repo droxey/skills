@@ -45,7 +45,7 @@ python -m pytest -q
 ```
 
 CI runs these checks on pushes to `main` and pull requests on Linux, macOS, and
-Windows. It validates the catalog; Skillshare manages distribution separately.
+Windows. It validates the catalog; Skill Sync manages distribution separately.
 The validator checks all skill contracts. Tests cover the validator, hardening
 helpers, routing evaluator, trigger evaluator, and the two Nebula-specific skills;
 they do not prove every skill's live behavior.
@@ -54,28 +54,29 @@ The maintenance commands `python tools/harden_skills.py` and
 `python tools/finalize_skills.py` rewrite skill files. Run them only when changing
 the catalog, then inspect the diff and rerun validation.
 
-### Skillshare
+### Skill Sync
 
-Use [Skillshare](https://github.com/runkids/skillshare) to manage skill distribution.
-Inspect the configured source and targets before syncing; this repository does not
-prescribe a global config or target paths. With Skillshare installed, these global
-commands inspect configuration and preview changes:
+Whenever adding a skill, install it and sync its validated package to
+[Skill Sync](https://skillsync.com/docs/skills). Use the `skl` CLI; sign in with
+`skl login` when required. Preview each upload, then upload privately:
 
 ```bash
-skillshare status -g --json
-skillshare diff -g --json
-skillshare doctor -g --json
-skillshare sync -g --dry-run
+skl skills upload /absolute/path/to/skill --dry-run
+skl skills upload /absolute/path/to/skill
 ```
 
-Use `-p` instead for a configured project. Check command help for your installed
-version. A clean repository test run does not establish that local targets are
-synced. The former script-based sync workflow has been retired.
+Verify the remote skill's files and report any blocked sync as incomplete. Remote
+uploads are private by default. Preserve source attribution and licenses, and do
+not overwrite a conflicting skill or publish it publicly without authorization.
+
+`skl skills sync` compares workspace skills; with a name it pulls that skill and
+never uploads. `skl sync` uploads conversation history and is outside this workflow.
+Skillshare is a different product. The former script-based sync workflow is retired.
 
 ### Use this repository with any agent harness
 
 [![Last updated](https://img.shields.io/github/last-commit/droxey/skills?label=last%20updated)](https://github.com/droxey/skills/commits/main)
-[![Skills](https://img.shields.io/badge/skills-35-blue)](#skills)
+[![Skills](https://img.shields.io/badge/skills-40-blue)](#skills)
 
 #### Kickoff prompt
 
@@ -100,12 +101,16 @@ to the user's request. If no skill clearly applies, proceed without one.
 - [code-review](code-review/SKILL.md)
 - [codespace-operator-v2](codespace-operator-v2/SKILL.md)
 - [dani-roxberrys-teaching-voice](dani-roxberrys-teaching-voice/SKILL.md)
+- [drive-motivation](drive-motivation/SKILL.md)
 - [essence](essence/SKILL.md)
 - [essence-commit](essence-commit/SKILL.md)
 - [essence-doc](essence-doc/SKILL.md)
 - [essence-pr](essence-pr/SKILL.md)
 - [fleet-audit-patterns](fleet-audit-patterns/SKILL.md)
+- [gamification](gamification/SKILL.md)
+- [gamification-loops](gamification-loops/SKILL.md)
 - [go-defensive](go-defensive/SKILL.md)
+- [hooked-ux](hooked-ux/SKILL.md)
 - [humanize](humanize/SKILL.md)
 - [improve](improve/SKILL.md)
 - [intake-implementation-workflow](intake-implementation-workflow/SKILL.md)
@@ -113,6 +118,7 @@ to the user's request. If no skill clearly applies, proceed without one.
 - [linkedin-lead-gen-outreach](linkedin-lead-gen-outreach/SKILL.md)
 - [markdown-mode-router](markdown-mode-router/SKILL.md)
 - [meeting-to-action](meeting-to-action/SKILL.md)
+- [microinteractions](microinteractions/SKILL.md)
 - [mobile-forensics](mobile-forensics/SKILL.md)
 - [model-cost-estimator](model-cost-estimator/SKILL.md)
 - [nextjs-nebula-miniapp](nextjs-nebula-miniapp/SKILL.md)
@@ -128,3 +134,6 @@ to the user's request. If no skill clearly applies, proceed without one.
 - [tdd-workflows-tdd-cycle](tdd-workflows-tdd-cycle/SKILL.md)
 - [teaching-lesson-plan](teaching-lesson-plan/SKILL.md)
 - [web-scraper](web-scraper/SKILL.md)
+
+The imported design skills preserve their upstream license in `UPSTREAM_LICENSE.txt`
+and source commit, original file hashes, and local contract adaptations in `UPSTREAM.json`.

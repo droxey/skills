@@ -1,0 +1,30 @@
+{
+  "commit": "e8dcf4e8737921a10088bd5c9eb65e81f74c051f",
+  "files": {
+    "SKILL.md": "5b98a4595a3b81fdadce6d053049f089b9ec2c1c",
+    "references/patterns.md": "50f4363a6a179e707e12241ab054df32d9865897",
+    "references/sharp_edges.md": "b8c44cbfa2b2177ba3d1e2ed10dd1432cccf3d59",
+    "references/validations.md": "0739b6cdc78ad7c45c09a5dfe81a9d34937e8a73"
+  },
+  "imported_by": "droxey/skills import of FindFlips selected skills",
+  "license": "Apache-2.0",
+  "local_changes": {
+    "SKILL.md": [
+      "Normalize line endings to LF.",
+      "Use a concise trigger description beginning with Use when.",
+      "Declare catalog maturity 0 and append Purpose, Inputs, Outputs, Example, Success criteria, and Maturity sections.",
+      "Preserve upstream framework body and all bundled references."
+    ]
+  },
+  "local_sha256": {
+    "SKILL.md": "d8ea5e91e111c2590bc712a04cfffef9773d5fb33fe78c8f5a4e2a84c61d1e0b",
+    "UPSTREAM_LICENSE.txt": "9b19b4bf2d7c6df1974e35c761c84f10f258d9fcab64a60c292b2752e81a9ec2",
+    "references/patterns.md": "acab9ec546a7d7d4d06b754e886b560638da9b4851a1e550e48d504040c98459",
+    "references/sharp_edges.md": "2b5010ced318050cfd0c17501a848705102f7bd43f7ec5c7f8a8c19946d4b7cb",
+    "references/validations.md": "c0f49294ef70c7d008ab97c0aef0a2916eb3c4f5cab7c1f7c283b80f67a47250"
+  },
+  "name": "gamification-loops",
+  "path": "skills/gamification-loops",
+  "repo": "omer-metin/skills-for-antigravity",
+  "upstream_files_modified": true
+}

@@ -1,0 +1,28 @@
+{
+  "commit": "79b3ec32adc3c20e410245b2e536dbe07206db38",
+  "files": {
+    "SKILL.md": "9c31d7abe93aa39bc85a4f2bc742172e2594fc76",
+    "frameworks.md": "a7e917696159f781d0809064d47898a8d40092c8",
+    "mechanics.md": "357b333e87a0b8f6974fca0cda5bc0e3b01a44bc"
+  },
+  "imported_by": "droxey/skills import of FindFlips selected skills",
+  "license": "MIT",
+  "local_changes": {
+    "SKILL.md": [
+      "Normalize line endings to LF.",
+      "Use a concise trigger description beginning with Use when.",
+      "Declare catalog maturity 0 and append Purpose, Inputs, Outputs, Example, Success criteria, and Maturity sections.",
+      "Preserve upstream framework body and all bundled references."
+    ]
+  },
+  "local_sha256": {
+    "SKILL.md": "d71d096c943a4431b4606bf378d8d0d275f7abd10c9c858bf765c8f8949467a3",
+    "UPSTREAM_LICENSE.txt": "5e77cfc5fe436ca8a38b932aabbe9dc065508ef43fd9c867347afde7ed75dbce",
+    "frameworks.md": "f2c2b0616902a840799cebd103a0102e6ae7acce00e8342701e7e9f96b3fe893",
+    "mechanics.md": "32851a0a5fd807df2fac4430a182789f283ceee397a1b6258a20118d27b6b15c"
+  },
+  "name": "gamification",
+  "path": "skills/engineering/gamification",
+  "repo": "Firzus/agent-skills",
+  "upstream_files_modified": true
+}
