@@ -16,11 +16,12 @@
       "Normalize line endings to LF.",
       "Use a concise trigger description beginning with Use when.",
       "Declare catalog maturity 0 and append Purpose, Inputs, Outputs, Example, Success criteria, and Maturity sections.",
-      "Preserve upstream framework body and all bundled references."
+      "Preserve bundled references; locally correct diagnostic guidance as described below.",
+      "Define half-up rounding and every pass-count score; reserve full compliance for eight passing rows and align all score bands."
     ]
   },
   "local_sha256": {
-    "SKILL.md": "9d8d7cb95269627eb5814a8be2bfb24e23f7bfee91afa68448942e81535240d4",
+    "SKILL.md": "9db667d7bf85c700693ee0d400e3b52ef463decbf5fc7db2655789a3545b6cc1",
     "UPSTREAM_LICENSE.txt": "87c3c90f9e673a76b8ca81049b8fe30996b910a7a80140c3ed57a2ee922d2579",
     "references/case-studies.md": "abc31683a0b3b85d81b1fcd367caa436fe60905a909e0959c122e5ab195ed4bb",
     "references/feedback-patterns.md": "6f0ddaf49d86c1578397c532d25c307613d67faf6438feaa88224fe694671528",

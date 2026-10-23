@@ -20,9 +20,12 @@ Design motivation systems for products, teams, and organizations using the scien
 
 **Goal: 10/10.** Score any motivation system (product features, team incentives, gamification, engagement loops) against the [Quick Diagnostic](#quick-diagnostic): start at 5, add 1 for each of the first five rows answered "yes," then **subtract 2 if the sixth row is also "yes"** — an "if-then" reward doing the motivating crowds out the rest. Bands:
 
-- **9-10** — autonomy, mastery, and purpose all present; no if-then crowding-out.
-- **5-6** — one pillar carries the system; the other two are weak or extrinsic.
-- **≤3** — relies on rewards, mandates, or controlling behaviors; intrinsic motivation absent.
+- **9-10** — four or five intrinsic checks pass; no if-then rewards.
+- **7-8** — two or three intrinsic checks pass without if-then rewards, or four or five pass with them.
+- **5-6** — zero or one intrinsic check passes without if-then rewards, or two or three pass with them.
+- **3-4** — zero or one intrinsic check passes and if-then rewards are present.
+
+These bands summarize the checklist, not measured motivation or performance. Name the failed rows rather than inferring a missing pillar from the total alone.
 
 Always state the current score, which diagnostic rows failed, and the specific fixes to reach 10/10.
 
@@ -180,14 +183,14 @@ See [references/type-i.md](references/type-i.md) when shifting a team or user ba
 
 Audit any motivation system:
 
-| Question | If No | Action |
-|----------|-------|--------|
-| Can users choose what/when/how? | Autonomy violation | Add choices, flexibility, customization |
-| Can users see their progress? | No mastery signal | Add progress tracking, skill levels |
-| Is challenge matched to skill? | Boredom or anxiety | Implement adaptive difficulty |
-| Is there immediate feedback? | Can't improve | Add real-time response to actions |
-| Does the user know WHY this matters? | No purpose | Connect to mission, show impact |
-| Are we using "if-then" rewards? | Extrinsic crowding-out | Switch to "now-that" or intrinsic design |
+| Question | Failure answer | Issue | Action |
+|----------|----------------|-------|--------|
+| Can users choose what/when/how? | No | Autonomy violation | Add choices, flexibility, customization |
+| Can users see their progress? | No | No mastery signal | Add progress tracking, skill levels |
+| Is challenge matched to skill? | No | Boredom or anxiety | Implement adaptive difficulty |
+| Is there immediate feedback? | No | Can't improve | Add real-time response to actions |
+| Does the user know WHY this matters? | No | No purpose | Connect to mission, show impact |
+| Are we using "if-then" rewards? | Yes | Extrinsic crowding-out | Switch to "now-that" or intrinsic design |
 
 ## Further Reading
 
@@ -222,4 +225,4 @@ Explain each diagnostic score and proposed change using the supplied workflow; p
 
 ## Maturity
 
-Level 0 — imported design guidance; no deterministic behavior or live product validation is claimed. Local changes add catalog metadata and this contract; the upstream framework text and references are preserved. See `UPSTREAM.json` for the pinned source and `UPSTREAM_LICENSE.txt` for its license. Related skills named upstream are optional; use them only when available.
+Level 0 — imported design guidance; no live product validation is claimed. Local changes include catalog metadata, this contract, and diagnostic corrections; bundled references are unchanged. See `UPSTREAM.json` for the pinned source and local changes, and `UPSTREAM_LICENSE.txt` for its license. Related skills named upstream are optional; use them only when available.

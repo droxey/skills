@@ -18,10 +18,26 @@ Design the tiny, contained product moments users touch every day -- toggles, pas
 
 ## Scoring
 
-**Goal: 10/10.** Score by how many of the 8 Quick Diagnostic rows the microinteraction passes — `score = round(passed / 8 × 10)`, then read the band:
-- **9-10** = passes all 8 rows: deliberate discoverable trigger with visible states, simple predictable rules, sub-100ms feedback scaled to event significance, evolves over time, mode-free or mode-visible, learnable without help.
-- **5-6** = 4-5 rows pass: it works but has a generic feel -- e.g. feedback exists but is uniform, or the trigger lacks distinct states.
-- **<=3** = 2 or fewer rows pass: missing feedback, invisible triggers, or hidden modes that break trust.
+**Goal: 10/10.** Score by how many of the 8 Quick Diagnostic rows the microinteraction passes — `score = round(passed / 8 × 10)`. Round to the nearest integer, with exact halves rounded upward:
+
+| Passed rows | Score |
+|-------------|-------|
+| 0 | 0 |
+| 1 | 1 |
+| 2 | 3 |
+| 3 | 4 |
+| 4 | 5 |
+| 5 | 6 |
+| 6 | 8 |
+| 7 | 9 |
+| 8 | 10 |
+
+- **10** = all 8 rows pass.
+- **8-9** = 6-7 rows pass; identify the remaining gaps without claiming full compliance.
+- **5-6** = 4-5 rows pass; several interaction details still need work.
+- **0-4** = 0-3 rows pass; prioritize the failed rows with the greatest impact on usability.
+
+Scores 2 and 7 do not occur under this mapping. This is a checklist score, not a measured usability result.
 
 Always state the current score, which diagnostic rows failed, and the specific fix for each.
 
@@ -234,4 +250,4 @@ Cover applicable loading, success, error, interrupted, and repeated-action state
 
 ## Maturity
 
-Level 0 — imported design guidance; no deterministic behavior or live product validation is claimed. Local changes add catalog metadata and this contract; the upstream framework text and references are preserved. See `UPSTREAM.json` for the pinned source and `UPSTREAM_LICENSE.txt` for its license. Related skills named upstream are optional; use them only when available.
+Level 0 — imported design guidance; no live product validation is claimed. Local changes include catalog metadata, this contract, and diagnostic corrections; bundled references are unchanged. See `UPSTREAM.json` for the pinned source and local changes, and `UPSTREAM_LICENSE.txt` for its license. Related skills named upstream are optional; use them only when available.
