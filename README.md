@@ -76,7 +76,7 @@ Skillshare is a different product. The former script-based sync workflow is reti
 ### Use this repository with any agent harness
 
 [![Last updated](https://img.shields.io/github/last-commit/droxey/skills?label=last%20updated)](https://github.com/droxey/skills/commits/main)
-[![Skills](https://img.shields.io/badge/skills-40-blue)](#skills)
+[![Skills](https://img.shields.io/badge/skills-41-blue)](#skills)
 
 #### Kickoff prompt
 
@@ -111,6 +111,7 @@ to the user's request. If no skill clearly applies, proceed without one.
 - [gamification-loops](gamification-loops/SKILL.md)
 - [go-defensive](go-defensive/SKILL.md)
 - [hooked-ux](hooked-ux/SKILL.md)
+- [human-design-gene-keys](human-design-gene-keys/SKILL.md)
 - [humanize](humanize/SKILL.md)
 - [improve](improve/SKILL.md)
 - [intake-implementation-workflow](intake-implementation-workflow/SKILL.md)
