@@ -72,6 +72,10 @@
       "path": "hooked-ux"
     },
     {
+      "name": "human-design-gene-keys",
+      "path": "human-design-gene-keys"
+    },
+    {
       "name": "humanize",
       "path": "humanize"
     },
